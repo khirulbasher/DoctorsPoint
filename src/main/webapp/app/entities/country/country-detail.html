@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="projectApp.country.detail.title">Country</span> {{vm.country.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details" >
+        <dt><span data-translate="projectApp.country.name">Name</span></dt>
+        <dd>
+            <span>{{vm.country.name}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.country.code">Code</span></dt>
+        <dd>
+            <span>{{vm.country.code}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.country.active">Active</span></dt>
+        <dd>
+            <span>{{vm.country.active}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.country.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{vm.country.latitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.country.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{vm.country.longitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.country.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.country.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.country.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+            <span>{{vm.country.lastModifyDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="country-detail.edit({id:vm.country.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

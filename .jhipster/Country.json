@@ -1,7 +1,7 @@
 {
 
 	"relationships": [
-        
+
     ],
 	"fields" : [
 		{
@@ -31,34 +31,22 @@
 		{
 			"fieldId" : 4,
 			"fieldName" : "latitude",
-			"fieldType" : "String",
-			"fieldValidateRules" : [
-				"required"
-			]
+			"fieldType" : "String"
 		},
 		{
 			"fieldId" : 5,
 			"fieldName" : "longitude",
-			"fieldType" : "String",
-			"fieldValidateRules" : [
-				"required"
-			]
+			"fieldType" : "String"
 		},
 		{
 			"fieldId" : 6,
 			"fieldName" : "lastModifiedBy",
-			"fieldType" : "Long",
-			"fieldValidateRules" : [
-				"required"
-			]
+			"fieldType" : "Long"
 		},
 		{
 			"fieldId" : 7,
 			"fieldName" : "lastModifyDate",
-			"fieldType" : "LocalDate",
-			"fieldValidateRules" : [
-				"required"
-			]
+			"fieldType" : "LocalDate"
 		}
 	],
 	"changelogDate": "20180204020950",
