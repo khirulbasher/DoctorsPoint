@@ -1,8 +1,6 @@
 package com.lemon.project.security;
 
 import com.lemon.project.repository.UserRepository;
-import com.lemon.project.service.UserService;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -88,20 +86,4 @@ public final class SecurityUtils {
         return userRepository.getIdByLogin(getCurrentUserLogin().get());
     }
 
-    /**
-     * Return the current user, or throws an exception, if the user is not
-     * authenticated yet.
-     *
-     * @return the current user
-     */
-    public static CustomUserDetails getCurrentUser() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        if (authentication != null) {
-            if (authentication.getPrincipal() instanceof CustomUserDetails) {
-                return (CustomUserDetails) authentication.getPrincipal();
-            }
-        }
-        throw new IllegalStateException("User not found!");
-    }
 }

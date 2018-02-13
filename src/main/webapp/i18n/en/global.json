@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Project",
+        "title": "Doctor's Point",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -74,7 +74,8 @@
             }
         },
         "field": {
-            "id": "ID"
+            "id": "ID",
+            "sl": "Sl"
         },
         "ribbon": {
             "dev":"Development"
@@ -112,7 +113,11 @@
             "number": "This field should be a number.",
             "datetimelocal": "This field should be a date and time.",
             "patternLettersAndDigits": "This field can only contain letters and digits."
-        }
+        },
+        "field": "Field",
+        "value": "Value",
+        "location": "Location",
+        "activeStatus": "Active Status"
     },
     "error": {
         "internalServerError": "Internal server error",
@@ -123,6 +128,5 @@
         "userexists": "Login name already used!",
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
-    },
-    "footer": "This is your footer"
+    }
 }

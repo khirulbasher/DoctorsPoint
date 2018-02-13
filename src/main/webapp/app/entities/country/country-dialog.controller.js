@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('CountryDialogController', CountryDialogController);
 
-    CountryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Country'];
+    CountryDialogController.$inject = ['$timeout', '$scope', 'entity', 'Country','$state'];
 
-    function CountryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Country) {
+    function CountryDialogController ($timeout, $scope, entity, Country,$state) {
         var vm = this;
 
         vm.country = entity;
@@ -21,7 +21,7 @@
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            $state.go('country',{reload:true});
         }
 
         function save () {
@@ -35,7 +35,7 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('projectApp:countryUpdate', result);
-            $uibModalInstance.close(result);
+            clear();
             vm.isSaving = false;
         }
 

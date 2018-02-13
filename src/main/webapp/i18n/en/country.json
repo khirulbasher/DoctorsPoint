@@ -4,7 +4,7 @@
             "home": {
                 "title": "Countries",
                 "createLabel": "Create a new Country",
-                "createOrEditLabel": "Create or edit a Country"
+                "createOrEditLabel": "Country"
             },
             "created": "A new Country is created with identifier {{ param }}",
             "updated": "A Country is updated with identifier {{ param }}",

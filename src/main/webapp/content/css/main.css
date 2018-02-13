@@ -340,3 +340,69 @@ ui bootstrap tweaks
 
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+
+/*Entity Tables*/
+/*th {
+    background: #00726b;
+    color: #e0e0e0;
+}
+
+tr,td {
+    background: #00817a;
+    color: #e0e0e0;
+}*/
+/*td {
+    background: #8c8e91;
+    color: #e0e0e0;
+}*/
+
+.heading {
+    font-weight: bold;
+    font-family: "Droid Sans", sans-serif;
+    font-size: 250%;
+    color: #46484b;
+}
+
+.btn.disabled:hover, .btn[disabled]:hover, fieldset[disabled]:hover,.btn-info {
+    background-color: #808285;
+    border-color: #60635f;
+}
+
+th,.btn-primary,.btn-info:hover {
+    color: #fff;
+    background-color: #5e6063;
+    border-color: #60635f;
+}
+
+.btn-danger,.btn-primary:hover {
+    background-color: #333538;
+    border-color: #60635f;
+}
+
+th,.btn-danger:hover,.btn-danger:active,.btn-info:active,.btn-primary:active,.btn-info:active:focus,
+.btn-primary:active:focus,.btn-danger:active:focus {
+    background-color: #2b2d30;
+    border-color: #60635f;
+}
+
+td>a {
+    text-decoration: underline;
+    color: #0f0f0f;
+    font-weight: bold;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #46484b;
+    border-color: #60635f;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #46484b;
+    outline: 0;
+}

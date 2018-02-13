@@ -20,10 +20,15 @@
         ])
         .run(run);
 
-    run.$inject = ['stateHandler', 'translationHandler'];
+    run.$inject = ['stateHandler', 'translationHandler','$rootScope'];
 
-    function run(stateHandler, translationHandler) {
+    function run(stateHandler, translationHandler,$rootScope) {
         stateHandler.initialize();
         translationHandler.initialize();
+        $rootScope.currentDate=new Date();
+
+        $rootScope.getActive=function(active) {
+          return active?"Active":"Inactive";
+        };
     }
 })();
