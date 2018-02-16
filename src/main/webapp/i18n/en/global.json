@@ -92,7 +92,10 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "ok" : "Ok",
+            "confirmMessage": "Are You Sure To Do This Operation ? ",
+            "sure": "I am Sure"
         },
         "detail": {
             "field": "Field",

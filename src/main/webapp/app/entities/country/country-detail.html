@@ -37,13 +37,13 @@
             </tbody>
         </table>
     </div>
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
+    <button type="button"
+            ng-click="vm.cancel()"
+            class="btn btn-in">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" ui-sref="country.edit({id:vm.country.id})" class="btn btn-primary">
+    <button type="button" ui-sref="country.edit({id:vm.country.id})" class="btn btn-pr">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
     </button>

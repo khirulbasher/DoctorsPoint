@@ -55,7 +55,7 @@
             parent: 'country',
             url: '/detail/{id}',
             data: {
-                authorities: ['ROLE_ADMIN'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT'],
                 pageTitle: 'projectApp.country.detail.title'
             },
             views: {
@@ -72,14 +72,6 @@
                 }],
                 entity: ['$stateParams', 'Country', function($stateParams, Country) {
                     return Country.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'country',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
                 }]
             }
         })
@@ -87,7 +79,7 @@
             parent: 'country',
             url: '/new',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
             views: {
                 'content@': {
@@ -102,8 +94,7 @@
                     return $translate.refresh();
                 }],
                 entity: function () {
-                    return {
-                    };
+                    return null;
                 }
             }
         })
@@ -111,7 +102,7 @@
             parent: 'country',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
             views: {
                 'content@': {
@@ -134,21 +125,27 @@
             parent: 'country',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/country/country-delete-dialog.html',
-                    controller: 'CountryDeleteController',
+                    templateUrl: 'app/entities/entity-global-dialog.html',
+                    controller: 'EntityGlobalController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Country', function(Country) {
-                            return Country.get({id : $stateParams.id}).$promise;
+                        obj: ['$stateParams','Country', function($stateParams, Country) {
+                            return {
+                                title:'Country Delete Operation',
+                                callback: function() {
+                                    Country.delete({id:$stateParams.id});
+                                },
+                                parent: 'country'
+                            }
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('country', null, { reload: 'country' });
+                    $state.go('country', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

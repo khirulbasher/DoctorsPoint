@@ -5,17 +5,13 @@
         .module('projectApp')
         .controller('CountryDetailController', CountryDetailController);
 
-    CountryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Country'];
+    CountryDetailController.$inject = ['$scope', '$state', 'entity'];
 
-    function CountryDetailController($scope, $rootScope, $stateParams, previousState, entity, Country) {
+    function CountryDetailController($scope, $state, entity) {
         var vm = this;
-
         vm.country = entity;
-        vm.previousState = previousState.name;
-
-        var unsubscribe = $rootScope.$on('projectApp:countryUpdate', function(event, result) {
-            vm.country = result;
-        });
-        $scope.$on('$destroy', unsubscribe);
+        vm.cancel = function() {
+            $state.go('country',{},{reload:false});
+        };
     }
 })();

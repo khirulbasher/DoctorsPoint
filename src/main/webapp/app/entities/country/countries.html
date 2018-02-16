@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="country.new" >
+                <button class="btn btn-pr" ui-sref="country.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="projectApp.country.home.createLabel">
                         Create new Country
@@ -37,18 +37,18 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="country-detail({id:country.id})"
-                                    class="btn btn-info btn-sm">
+                                    class="btn btn-in btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="country.edit({id:country.id})"
-                                    class="btn btn-primary btn-sm">
+                                    class="btn btn-pr btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="country.delete({id:country.id})"
+                            <button type="button"
+                                    ng-click="vm.delete(country.id)"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
@@ -64,3 +64,5 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
+
+

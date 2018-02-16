@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('CountryController', CountryController);
 
-    CountryController.$inject = ['$state', 'Country', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CountryController.$inject = ['$state', 'Country', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function CountryController($state, Country, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CountryController($state, Country, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,13 @@
                 search: vm.currentSearch
             });
         }
+
+        vm.delete=function(id) {
+            $state.go('country.delete',{id:id,callback:vm.call});
+        }
+
+        $scope.$on('country',function($event,message){
+            loadAll();
+        });
     }
 })();
