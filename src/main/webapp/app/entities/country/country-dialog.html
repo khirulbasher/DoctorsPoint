@@ -4,56 +4,71 @@
     <div class="modal-header">
         <h4 class="modal-title" id="myCountryLabel" data-translate="projectApp.country.home.createOrEditLabel"></h4>
     </div>
-    <div class="modal-body">
+    <div class="form-group">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.country.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.country.name"
-                    required/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.country.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.country.name"
+                       required/>
+                <div ng-show="editForm.name.$invalid && editForm.name.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.country.code" for="field_code">Code</label>
+                <input type="text" class="form-control" name="code" id="field_code"
+                       ng-model="vm.country.code"
+                       required/>
+                <div ng-show="editForm.code.$invalid && editForm.code.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.country.code" for="field_code">Code</label>
-            <input type="text" class="form-control" name="code" id="field_code"
-                    ng-model="vm.country.code"
-                    required/>
-            <div ng-show="editForm.code.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.country.latitude" for="field_latitude">Latitude</label>
+                <input type="text" class="form-control" name="latitude" id="field_latitude"
+                       ng-model="vm.country.latitude"
+                />
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.country.active" for="field_active">Active</label>
-                <input type="checkbox" name="active" id="field_active"
-                          ng-model="vm.country.active"/>
-            <div ng-show="editForm.active.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.active.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.country.longitude" for="field_longitude">Longitude</label>
+                <input type="text" class="form-control" name="longitude" id="field_longitude"
+                       ng-model="vm.country.longitude"
+                />
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.country.latitude" for="field_latitude">Latitude</label>
-            <input type="text" class="form-control" name="latitude" id="field_latitude"
-                    ng-model="vm.country.latitude"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.country.longitude" for="field_longitude">Longitude</label>
-            <input type="text" class="form-control" name="longitude" id="field_longitude"
-                    ng-model="vm.country.longitude"
-                    />
         </div>
     </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <label class="control-label" data-translate="entity.activeStatus" for="field_active">Active</label>
+
+            <div class="input-margin" id="field_active" >
+                <label class="radio-inline">
+                    <input type="radio" name="active" required
+                           ng-checked="vm.country.active == true" name="active"
+                           value="true" ng-model="vm.country.active">
+                    <span translate="status.active">active</span></label>
+                <label class="radio-inline">
+                    <input type="radio" name="active"
+                           ng-checked="vm.country.active == false" name="active"
+                           value="false"
+                           ng-model="vm.country.active">
+                    <span translate="status.inactive">inactive</span></label>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>

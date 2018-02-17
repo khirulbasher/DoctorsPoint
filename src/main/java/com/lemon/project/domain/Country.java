@@ -123,10 +123,7 @@ public class Country implements Serializable {
             return false;
         }
         Country country = (Country) o;
-        if (country.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), country.getId());
+        return country.getId() != null && getId() != null && Objects.equals(getId(), country.getId());
     }
 
     @Override
