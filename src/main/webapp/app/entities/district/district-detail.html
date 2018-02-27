@@ -1,0 +1,51 @@
+
+<div>
+    <h2><span data-translate="projectApp.district.detail.title">District</span> {{vm.district.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="projectApp.district.name">Name</span></dt>
+        <dd>
+            <span>{{vm.district.name}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.code">Code</span></dt>
+        <dd>
+            <span>{{vm.district.code}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.active">Active</span></dt>
+        <dd>
+            <span>{{vm.district.active}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{vm.district.latitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{vm.district.longitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.district.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+            <span>{{vm.district.lastModifyDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.district.country">Country</span></dt>
+        <dd>
+            <a ui-sref="country-detail({id:vm.district.country.id})">{{vm.district.country.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="district-detail.edit({id:vm.district.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

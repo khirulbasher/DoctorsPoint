@@ -5,6 +5,7 @@ import com.lemon.project.domain.Country;
 
 import com.lemon.project.repository.CountryRepository;
 import com.lemon.project.security.SecurityUtils;
+import com.lemon.project.service.EntityDao;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -25,6 +26,7 @@ import java.net.URISyntaxException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -43,8 +45,12 @@ public class CountryResource {
 
     private final CountryRepository countryRepository;
 
-    public CountryResource(CountryRepository countryRepository) {
+    private final EntityDao entityDao;
+
+    @Inject
+    public CountryResource(CountryRepository countryRepository, EntityDao entityDao) {
         this.countryRepository = countryRepository;
+        this.entityDao = entityDao;
     }
 
     /**

@@ -8,6 +8,7 @@
             "entities": {
                 "main": "एंटिटीज़",
                 "country": "Country",
+                "district": "District",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

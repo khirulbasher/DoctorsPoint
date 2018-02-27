@@ -1,18 +1,10 @@
 {
-	
-	"relationships": [
 
-		{
-            "relationshipId": 1,
-            "relationshipName": "location",
-            "otherEntityName": "Location",
-			"relationshipType": "one-to-one",
-			"otherEntityField": "tag"
-        },
+	"relationships": [
         {
-            "relationshipId": 2,
-            "relationshipName": "division",
-            "otherEntityName": "Division",
+            "relationshipId": 1,
+            "relationshipName": "country",
+            "otherEntityName": "Country",
 			"relationshipType": "many-to-one",
 			"otherEntityField": "name"
         }
@@ -41,7 +33,27 @@
 			"fieldValidateRules" : [
 				"required"
 			]
-		}
+		},
+        {
+            "fieldId" : 4,
+            "fieldName" : "latitude",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 5,
+            "fieldName" : "longitude",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 6,
+            "fieldName" : "lastModifiedBy",
+            "fieldType" : "Long"
+        },
+        {
+            "fieldId" : 7,
+            "fieldName" : "lastModifyDate",
+            "fieldType" : "LocalDate"
+        }
 	],
 	"changelogDate": "20180203020950",
     "dto": "no",
