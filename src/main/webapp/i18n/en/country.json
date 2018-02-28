@@ -2,7 +2,7 @@
     "projectApp": {
         "country" : {
             "home": {
-                "title": "All Existing Countries",
+                "title": "Countries",
                 "createLabel": "Create a new Country",
                 "createOrEditLabel": "Country"
             },

@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/country?page&sort&search',
             data: {
-                authorities: ['ROLE_ADMIN'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT'],
                 pageTitle: 'projectApp.country.home.title'
             },
             views: {
@@ -29,7 +29,7 @@
                     squash: true
                 },
                 sort: {
-                    value: 'id,asc',
+                    value: 'name,asc',
                     squash: true
                 },
                 search: null
@@ -134,13 +134,14 @@
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        obj: ['$stateParams','Country', function($stateParams, Country) {
+                        obj: ['$stateParams','Country','$rootScope', function($stateParams, Country,$rootScope) {
                             return {
                                 title:'Country Delete Operation',
                                 callback: function() {
-                                    Country.delete({id:$stateParams.id});
-                                },
-                                parent: 'country'
+                                    Country.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('country','loadAll');
+                                    });
+                                }
                             }
                         }]
                     }

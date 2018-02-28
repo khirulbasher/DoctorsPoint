@@ -2,10 +2,8 @@ package com.lemon.project.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.Country;
-
 import com.lemon.project.repository.CountryRepository;
 import com.lemon.project.security.SecurityUtils;
-import com.lemon.project.service.EntityDao;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -23,10 +21,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -36,8 +32,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class CountryResource {
 
-    @Inject
-    private SecurityUtils securityUtils;
+    private final SecurityUtils securityUtils;
 
     private final Logger log = LoggerFactory.getLogger(CountryResource.class);
 
@@ -45,12 +40,10 @@ public class CountryResource {
 
     private final CountryRepository countryRepository;
 
-    private final EntityDao entityDao;
-
     @Inject
-    public CountryResource(CountryRepository countryRepository, EntityDao entityDao) {
+    public CountryResource(CountryRepository countryRepository, SecurityUtils securityUtils) {
         this.countryRepository = countryRepository;
-        this.entityDao = entityDao;
+        this.securityUtils = securityUtils;
     }
 
     /**

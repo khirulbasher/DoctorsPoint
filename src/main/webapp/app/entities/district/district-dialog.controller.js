@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('DistrictDialogController', DistrictDialogController);
 
-    DistrictDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'District', 'Country'];
+    DistrictDialogController.$inject = ['$timeout', '$scope', 'entity', 'District', 'Country','$state'];
 
-    function DistrictDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, District, Country) {
+    function DistrictDialogController ($timeout, $scope, entity, District, Country,$state) {
         var vm = this;
 
         vm.district = entity;
@@ -22,7 +22,7 @@
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            $state.go('district',{},{reload:false});
         }
 
         function save () {
@@ -36,7 +36,7 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('projectApp:districtUpdate', result);
-            $uibModalInstance.close(result);
+            clear();
             vm.isSaving = false;
         }
 

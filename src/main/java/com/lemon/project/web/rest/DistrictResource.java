@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.District;
 
 import com.lemon.project.repository.DistrictRepository;
+import com.lemon.project.security.SecurityUtils;
+import com.lemon.project.service.EntityDao;
+import com.lemon.project.utils.exception.PersistException;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -17,11 +20,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -36,9 +42,12 @@ public class DistrictResource {
     private static final String ENTITY_NAME = "district";
 
     private final DistrictRepository districtRepository;
+    private final SecurityUtils securityUtils;
 
-    public DistrictResource(DistrictRepository districtRepository) {
+    @Inject
+    public DistrictResource(DistrictRepository districtRepository, SecurityUtils securityUtils) {
         this.districtRepository = districtRepository;
+        this.securityUtils = securityUtils;
     }
 
     /**
@@ -55,6 +64,9 @@ public class DistrictResource {
         if (district.getId() != null) {
             throw new BadRequestAlertException("A new district cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        modify(district);
+
         District result = districtRepository.save(district);
         return ResponseEntity.created(new URI("/api/districts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -77,6 +89,7 @@ public class DistrictResource {
         if (district.getId() == null) {
             return createDistrict(district);
         }
+        modify(district);
         District result = districtRepository.save(district);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, district.getId().toString()))
@@ -124,5 +137,10 @@ public class DistrictResource {
         log.debug("REST request to delete District : {}", id);
         districtRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    private void modify(District district) {
+        district.setLastModifiedBy(securityUtils.getCurrentUserId());
+        district.setLastModifyDate(LocalDate.now());
     }
 }

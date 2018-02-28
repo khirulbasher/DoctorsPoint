@@ -21,7 +21,7 @@
         });
 
         function clear () {
-            $state.go('country',{reload:true});
+            $state.go('country',{reload:false});
         }
 
         function save () {

@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="country in vm.countries track by country.id">
-                    <td>{{$index}}</td>
+                    <td>{{$index+1}}</td>
                     <td><a ui-sref="country-detail({id:country.id})">{{country.name}}</a></td>
                     <td>{{country.code}}</td>
                     <td>{{getActive(country.active)}}</td>

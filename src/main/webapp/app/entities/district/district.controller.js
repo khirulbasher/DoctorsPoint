@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('DistrictController', DistrictController);
 
-    DistrictController.$inject = ['$state', 'District', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    DistrictController.$inject = ['$state', 'District', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function DistrictController($state, District, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function DistrictController($state, District, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,9 @@
                 search: vm.currentSearch
             });
         }
+
+        $scope.$on('district',function($event,message){
+            loadAll();
+        });
     }
 })();

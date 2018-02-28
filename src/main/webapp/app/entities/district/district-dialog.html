@@ -2,86 +2,77 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
         <h4 class="modal-title" id="myDistrictLabel" data-translate="projectApp.district.home.createOrEditLabel">Create or edit a District</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.district.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.district.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.district.name"
-                    required/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.code" for="field_code">Code</label>
-            <input type="text" class="form-control" name="code" id="field_code"
-                    ng-model="vm.district.code"
-                    required/>
-            <div ng-show="editForm.code.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.active" for="field_active">Active</label>
-                <input type="checkbox" name="active" id="field_active"
-                          ng-model="vm.district.active"/>
-            <div ng-show="editForm.active.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.active.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.latitude" for="field_latitude">Latitude</label>
-            <input type="text" class="form-control" name="latitude" id="field_latitude"
-                    ng-model="vm.district.latitude"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.longitude" for="field_longitude">Longitude</label>
-            <input type="text" class="form-control" name="longitude" id="field_longitude"
-                    ng-model="vm.district.longitude"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
-            <input type="number" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
-                    ng-model="vm.district.lastModifiedBy"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.district.lastModifyDate" for="field_lastModifyDate">Last Modify Date</label>
-                <div class="input-group">
-                    <input id="field_lastModifyDate" type="text" class="form-control" name="lastModifyDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.district.lastModifyDate" is-open="vm.datePickerOpenStatus.lastModifyDate"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifyDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.district.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.district.name"
+                       required/>
+                <div ng-show="editForm.name.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
                 </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.district.code" for="field_code">Code</label>
+                <input type="text" class="form-control" name="code" id="field_code"
+                       ng-model="vm.district.code"
+                       required/>
+                <div ng-show="editForm.code.$invalid && editForm.code.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label data-translate="projectApp.district.country" for="field_country">Country</label>
-            <select class="form-control" id="field_country" name="country" ng-model="vm.district.country" ng-options="Country as Country.name for Country in vm.countries track by Country.id">
-                <option value=""></option>
-            </select>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.district.latitude" for="field_latitude">Latitude</label>
+                <input type="text" class="form-control" name="latitude" id="field_latitude"
+                       ng-model="vm.district.latitude"
+                />
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.district.longitude" for="field_longitude">Longitude</label>
+                <input type="text" class="form-control" name="longitude" id="field_longitude"
+                       ng-model="vm.district.longitude"
+                />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label data-translate="projectApp.district.country" for="field_country">Country</label>
+                <select class="form-control" id="field_country" name="country" ng-model="vm.district.country" ng-options="Country as Country.name for Country in vm.countries track by Country.id">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="control-label" data-translate="entity.activeStatus" for="field_active">Active</label>
+
+                <div class="input-margin" id="field_active" >
+                    <label class="radio-inline">
+                        <input type="radio" name="active" required
+                               ng-checked="vm.district.active == true" name="active"
+                               value="true" ng-model="vm.district.active">
+                        <span translate="status.active">active</span></label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inActive"
+                               ng-checked="vm.district.active == false" name="inActive"
+                               value="false"
+                               ng-model="vm.district.active">
+                        <span translate="status.inactive">inactive</span></label>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

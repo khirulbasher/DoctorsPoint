@@ -5,17 +5,13 @@
         .module('projectApp')
         .controller('DistrictDetailController', DistrictDetailController);
 
-    DistrictDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'District', 'Country'];
+    DistrictDetailController.$inject = ['$scope', '$rootScope', '$state', 'entity'];
 
-    function DistrictDetailController($scope, $rootScope, $stateParams, previousState, entity, District, Country) {
+    function DistrictDetailController($scope, $rootScope, $state, entity) {
         var vm = this;
-
         vm.district = entity;
-        vm.previousState = previousState.name;
-
-        var unsubscribe = $rootScope.$on('projectApp:districtUpdate', function(event, result) {
-            vm.district = result;
-        });
-        $scope.$on('$destroy', unsubscribe);
+        $scope.clear = function () {
+            $state.go('district',{},{reload:false});
+        }
     }
 })();

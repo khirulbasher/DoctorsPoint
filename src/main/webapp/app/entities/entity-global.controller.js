@@ -4,9 +4,9 @@
         .module('projectApp')
         .controller('EntityGlobalController',EntityGlobalController);
 
-    EntityGlobalController.$inject = ['$uibModalInstance','obj','$rootScope']
+    EntityGlobalController.$inject = ['$uibModalInstance','obj']
 
-    function EntityGlobalController($uibModalInstance,obj,$rootScope) {
+    function EntityGlobalController($uibModalInstance,obj) {
         var vm = this;
 
         vm.clear = clear;
@@ -20,7 +20,6 @@
         function callback () {
             vm.obj.callback();
             clear();
-            $rootScope.$broadcast(vm.obj.parent,'loadAll');
         }
     }
 })();

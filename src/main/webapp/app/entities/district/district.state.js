@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/district?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT'],
                 pageTitle: 'projectApp.district.home.title'
             },
             views: {
@@ -29,7 +29,7 @@
                     squash: true
                 },
                 sort: {
-                    value: 'id,asc',
+                    value: 'name,asc',
                     squash: true
                 },
                 search: null
@@ -55,7 +55,7 @@
             parent: 'district',
             url: '/district/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT'],
                 pageTitle: 'projectApp.district.detail.title'
             },
             views: {
@@ -72,120 +72,81 @@
                 }],
                 entity: ['$stateParams', 'District', function($stateParams, District) {
                     return District.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'district',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
                 }]
             }
-        })
-        .state('district-detail.edit', {
-            parent: 'district-detail',
-            url: '/detail/edit',
-            data: {
-                authorities: ['ROLE_USER']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/district/district-dialog.html',
-                    controller: 'DistrictDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['District', function(District) {
-                            return District.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
         })
         .state('district.new', {
             parent: 'district',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/district/district-dialog.html',
                     controller: 'DistrictDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                name: null,
-                                code: null,
-                                active: false,
-                                latitude: null,
-                                longitude: null,
-                                lastModifiedBy: null,
-                                lastModifyDate: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('district', null, { reload: 'district' });
-                }, function() {
-                    $state.go('district');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('district');
+                    return $translate.refresh();
+                }],
+                entity: function () {
+                    return null;
+                }
+            }
         })
         .state('district.edit', {
             parent: 'district',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/district/district-dialog.html',
                     controller: 'DistrictDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['District', function(District) {
-                            return District.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('district', null, { reload: 'district' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('district');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'District', function($stateParams, District) {
+                    return District.get({id : $stateParams.id}).$promise;
+                }]
+            }
         })
         .state('district.delete', {
             parent: 'district',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/district/district-delete-dialog.html',
-                    controller: 'DistrictDeleteController',
+                    templateUrl: 'app/entities/entity-global-dialog.html',
+                    controller: 'EntityGlobalController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['District', function(District) {
-                            return District.get({id : $stateParams.id}).$promise;
+                        obj: ['$stateParams','District','$rootScope', function($stateParams, District,$rootScope) {
+                            return {
+                                title:'District Delete Operation',
+                                callback: function() {
+                                    District.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('district','loadAll');
+                                    });
+                                }
+                            }
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('district', null, { reload: 'district' });
+                    $state.go('district', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

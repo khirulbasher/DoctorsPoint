@@ -4,7 +4,7 @@
             "home": {
                 "title": "Districts",
                 "createLabel": "Create a new District",
-                "createOrEditLabel": "Create or edit a District"
+                "createOrEditLabel": "District"
             },
             "created": "A new District is created with identifier {{ param }}",
             "updated": "A District is updated with identifier {{ param }}",
