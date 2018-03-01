@@ -2,11 +2,8 @@ package com.lemon.project.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.District;
-
 import com.lemon.project.repository.DistrictRepository;
 import com.lemon.project.security.SecurityUtils;
-import com.lemon.project.service.EntityDao;
-import com.lemon.project.utils.exception.PersistException;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -24,10 +21,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**

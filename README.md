@@ -120,3 +120,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
+
+
+INSERT INTO jhi_authority (name) VALUES('ROLE_MGT');
+INSERT INTO jhi_authority (name) VALUES('ROLE_DOCTOR');
+INSERT INTO jhi_authority (name) VALUES('ROLE_CLINIC');
+INSERT INTO jhi_authority (name) VALUES('ROLE_HOSPITAL');
+INSERT INTO jhi_authority (name) VALUES('ROLE_ANONYMOUS');

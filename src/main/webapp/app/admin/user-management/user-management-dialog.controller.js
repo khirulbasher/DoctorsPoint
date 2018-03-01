@@ -5,13 +5,15 @@
         .module('projectApp')
         .controller('UserManagementDialogController',UserManagementDialogController);
 
-    UserManagementDialogController.$inject = ['$stateParams', '$uibModalInstance', 'entity', 'User', 'JhiLanguageService'];
+    UserManagementDialogController.$inject = ['$state', 'entity', 'User', 'JhiLanguageService','UserService'];
 
-    function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User, JhiLanguageService) {
+    function UserManagementDialogController ($state, entity, User, JhiLanguageService,UserService) {
         var vm = this;
 
-        vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        vm.clear = clear;
+        //vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
+        UserService.getByMapping('authority',function (results) {
+            vm.authorities = results;
+        });
         vm.languages = null;
         vm.save = save;
         vm.user = entity;
@@ -21,13 +23,9 @@
             vm.languages = languages;
         });
 
-        function clear () {
-            $uibModalInstance.dismiss('cancel');
-        }
-
         function onSaveSuccess (result) {
             vm.isSaving = false;
-            $uibModalInstance.close(result);
+            $state.go('user-management',{},{reload:false});
         }
 
         function onSaveError () {

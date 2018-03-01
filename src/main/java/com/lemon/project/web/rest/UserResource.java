@@ -1,20 +1,22 @@
 package com.lemon.project.web.rest;
 
-import com.lemon.project.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.lemon.project.config.Constants;
+import com.lemon.project.domain.Authority;
 import com.lemon.project.domain.User;
 import com.lemon.project.repository.UserRepository;
 import com.lemon.project.security.AuthoritiesConstants;
+import com.lemon.project.service.EntityDao;
 import com.lemon.project.service.MailService;
 import com.lemon.project.service.UserService;
 import com.lemon.project.service.dto.UserDTO;
+import com.lemon.project.utils.exception.PersistException;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.errors.EmailAlreadyUsedException;
 import com.lemon.project.web.rest.errors.LoginAlreadyUsedException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,10 +27,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing users.
@@ -66,11 +70,15 @@ public class UserResource {
 
     private final MailService mailService;
 
-    public UserResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final EntityDao entityDao;
+
+    @Inject
+    public UserResource(UserRepository userRepository, UserService userService, MailService mailService, EntityDao entityDao) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.entityDao = entityDao;
     }
 
     /**
@@ -186,5 +194,23 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+    }
+
+    @GetMapping("/userService/{id}")
+    @Timed
+    @Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_DOCTOR,AuthoritiesConstants.ROLE_HOSPITAL,AuthoritiesConstants.ROLE_CLINIC,AuthoritiesConstants.ROLE_MGT})
+    public ResponseEntity<UserDTO> findOne(@PathVariable Long id) {
+        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthorities(id).map(UserDTO::new));
+    }
+
+    @PostMapping("/userService")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<List<String>> getByMapping(@RequestBody String context) throws PersistException {
+        switch (context) {
+            case "authority":
+                return Optional.ofNullable(entityDao.getColumnEfficiently(Authority.class,null,"name").get("name")).map(val->new ResponseEntity<>(val,HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

@@ -52,29 +52,22 @@
             data: {
                 authorities: ['ROLE_ADMIN']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/admin/user-management/user-management-dialog.html',
                     controller: 'UserManagementDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                id: null, login: null, firstName: null, lastName: null, email: null,
-                                activated: true, langKey: null, createdBy: null, createdDate: null,
-                                lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
-                                resetKey: null, authorities: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('user-management', null, { reload: true });
-                }, function() {
-                    $state.go('user-management');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('user-management');
+                    return $translate.refresh();
+                }],
+                entity: function () {
+                    return null;
+                }
+            }
         })
         .state('user-management.edit', {
             url: '/{login}/edit',
@@ -92,10 +85,12 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('user-management');
                     return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'User', function($stateParams, User) {
+                    return User.get({login:$stateParams.login}).$promise;
                 }]
             }
-        })
-        .state('user-management-detail', {
+        }).state('user-management-detail', {
             parent: 'user-management',
             url: '/{login}',
             data: {
@@ -113,6 +108,32 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('user-management');
                     return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'User', function($stateParams, User) {
+                    return User.get({login:$stateParams.login}).$promise;
+                }]
+            }
+        }).state('user-detail', {
+            parent: 'user-management',
+            url: '/{id}',
+            data: {
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_HOSPITAL','ROLE_CLINIC','ROLE_DOCTOR'],
+                pageTitle: 'user-management.detail.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/admin/user-management/user-management-detail.html',
+                    controller: 'UserManagementDetailController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('user-management');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'UserService', function($stateParams, UserService) {
+                    return UserService.get({id:$stateParams.id}).$promise;
                 }]
             }
         })

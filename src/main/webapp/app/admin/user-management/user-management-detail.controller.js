@@ -5,20 +5,10 @@
         .module('projectApp')
         .controller('UserManagementDetailController', UserManagementDetailController);
 
-    UserManagementDetailController.$inject = ['$stateParams', 'User'];
+    UserManagementDetailController.$inject = ['entity'];
 
-    function UserManagementDetailController($stateParams, User) {
+    function UserManagementDetailController(entity) {
         var vm = this;
-
-        vm.load = load;
-        vm.user = {};
-
-        vm.load($stateParams.login);
-
-        function load(login) {
-            User.get({login: login}, function(result) {
-                vm.user = result;
-            });
-        }
+        vm.user = entity;
     }
 })();

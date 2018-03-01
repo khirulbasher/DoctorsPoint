@@ -22,16 +22,12 @@
                     <td>{{vm.district.code}}</td>
                 </tr>
                 <tr>
-                    <td data-translate="projectApp.district.latitude"></td>
-                    <td>{{vm.district.latitude}}</td>
-                </tr>
-                <tr>
-                    <td data-translate="projectApp.district.longitude"></td>
-                    <td>{{vm.district.longitude}}</td>
+                    <td data-translate="entity.location"></td>
+                    <td>[Lat:{{vm.district.latitude}} , Lang:{{vm.district.longitude}}]</td>
                 </tr>
                 <tr>
                     <td data-translate="projectApp.district.lastModifiedBy"></td>
-                    <td>{{vm.district.lastModifiedBy}}</td>
+                    <td><a ui-sref="user-detail({id:vm.district.lastModifiedBy})">See Details</a> </td>
                 </tr>
                 <tr>
                     <td data-translate="projectApp.district.lastModifyDate"></td>

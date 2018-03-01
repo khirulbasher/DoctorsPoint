@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -26,7 +28,18 @@ public class EntityDaoImpl implements EntityDao {
 
     @Override
     public List<Map<String, Object>> getColumn(String table, String where, String columns) {
+        if(where==null) return jdbcTemplate.queryForList("SELECT " + columns + " FROM " + table );
         return jdbcTemplate.queryForList("SELECT " + columns + " FROM " + table + " WHERE " + where);
+    }
+
+    @Override
+    public <T> List<Map<String, Object>> getColumn(Class<T> table, String where, String columns) {
+        return getColumn(getTableNameFromClass(table), where, columns);
+    }
+
+    @Override
+    public <T> List<Map<String, Object>> getColumn(Class<T> table, String where, String... fieldNames) throws PersistException {
+        return getColumn(getTableNameFromClass(table), where, getColumnFromFields(table, fieldNames));
     }
 
     @Override
@@ -40,14 +53,12 @@ public class EntityDaoImpl implements EntityDao {
             buffer.append("SELECT ");
             String colName;
             listMap = new HashMap<>();
-            for (int i = 0; i < len - 1; i++) {
+            for (int i = 0; i < len; i++) {
                 colName = cols[i];
-                buffer.append(colName).append(" , ");
                 listMap.put(colName, new LinkedList<>());
             }
-            colName = cols[len - 1];
-            buffer.append(colName).append(" FROM ").append(table).append(" WHERE ").append(where);
-            listMap.put(colName, new LinkedList<>());
+            buffer.append(columns).append(" FROM ").append(table);
+            if(where!=null) buffer.append(" WHERE ").append(where);
             ResultSet resultSet = statement.executeQuery(buffer.toString());
             Set<String> columnSet = listMap.keySet();
             while (resultSet.next()) {
@@ -60,5 +71,33 @@ public class EntityDaoImpl implements EntityDao {
             throw new PersistException(e);
         }
         return listMap;
+    }
+
+    @Override
+    public <T> Map<String, List<String>> getColumnEfficiently(Class<T> table, String where, String columns) throws PersistException {
+        return getColumnEfficiently(getTableNameFromClass(table), where, columns);
+    }
+
+    @Override
+    public <T> Map<String, List<String>> getColumnEfficiently(Class<T> table, String where, String... fieldNames) throws PersistException {
+        return getColumnEfficiently(getTableNameFromClass(table), where, getColumnFromFields(table, fieldNames));
+    }
+
+    private String getTableNameFromClass(Class table) {
+        return ((Table)table.getAnnotation(Table.class)).name();
+    }
+
+    private String getColumnFromFields(Class table, String[] fieldNames) throws PersistException {
+        StringBuffer buffer = new StringBuffer();
+        try {
+            int len = fieldNames.length - 1;
+            for (int i = 0; i < len; i++) {
+                buffer.append(table.getDeclaredField(fieldNames[i]).getAnnotation(Column.class).name()).append(",");
+            }
+            buffer.append(table.getDeclaredField(fieldNames[len]).getAnnotation(Column.class).name());
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+        return buffer.toString();
     }
 }

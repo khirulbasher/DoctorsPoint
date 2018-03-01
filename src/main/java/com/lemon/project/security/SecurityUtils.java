@@ -1,6 +1,6 @@
 package com.lemon.project.security;
 
-import com.lemon.project.repository.UserRepository;
+import com.lemon.project.service.UserService;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +16,11 @@ import java.util.Optional;
 @Service
 public final class SecurityUtils {
 
-    @Inject
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    private SecurityUtils() {
+    @Inject
+    private SecurityUtils(UserService userService) {
+        this.userService = userService;
     }
 
     /**
@@ -83,7 +84,7 @@ public final class SecurityUtils {
     }
 
     public Long getCurrentUserId() {
-        return userRepository.getIdByLogin(getCurrentUserLogin().get());
+        return userService.getUserWithAuthoritiesByLogin(getCurrentUserLogin().get()).get().getId();
     }
 
 }
