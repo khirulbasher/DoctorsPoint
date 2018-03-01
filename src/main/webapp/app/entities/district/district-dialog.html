@@ -62,7 +62,7 @@
                 <div class="input-margin" id="field_active" >
                     <label class="radio-inline">
                         <input type="radio" name="active" required
-                               ng-checked="vm.district.active == true" name="active"
+                               ng-checked="vm.district.active == true || vm.district.active==null" name="active"
                                value="true" ng-model="vm.district.active">
                         <span translate="status.active">active</span></label>
                     <label class="radio-inline">

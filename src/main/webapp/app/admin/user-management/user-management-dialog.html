@@ -73,12 +73,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <label for="activated">
-                    <input ng-disabled="vm.user.id === null" type="checkbox" id="activated" name="activated" ng-model="vm.user.activated">
-                    <span data-translate="userManagement.activated">Activated</span>
-                </label>
-            </div>
 
             <div class="col-md-6">
                 <label data-translate="userManagement.langKey">Lang Key</label>
@@ -86,7 +80,26 @@
                         ng-options="language as language for language in vm.languages track by language">
                 </select>
             </div>
+
+            <div class="col-md-6">
+                <label class="control-label" data-translate="entity.activeStatus" for="field_active">Active</label>
+
+                <div class="input-margin" id="field_active" >
+                    <label class="radio-inline">
+                        <input type="radio" name="active" required
+                               ng-checked="vm.user.activated == true || vm.user.activated==null" name="active"
+                               value="true" ng-model="vm.user.activated">
+                        <span translate="status.active">active</span></label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inActive"
+                               ng-checked="vm.user.activated == false" name="inActive"
+                               value="false"
+                               ng-model="vm.user.activated">
+                        <span translate="status.inactive">inactive</span></label>
+                </div>
+            </div>
         </div>
+
         <div class="row">
             <div class="col-md-6">
                 <label data-translate="userManagement.profiles">Profiles</label>
@@ -95,6 +108,7 @@
                 </select>
             </div>
         </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="back('user-management')">
