@@ -39,3 +39,21 @@
         };
     }
 })();
+
+
+angular.module('ProjectApp',[])
+    .directive('checkOnDatabase',function ($http) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, ele, attrs, c) {
+                scope.$watch(attrs.ngModel,function (newVal,oldVa) {
+                    if(newVal != oldVal) {
+                        console.log("<><><><><><><><><><><>");
+                        console.log(attrs.ngModel);
+                        console.log("<><><><><><><><><><><>");
+                    }
+                });
+            }
+        }
+    });

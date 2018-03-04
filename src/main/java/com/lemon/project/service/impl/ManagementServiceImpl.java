@@ -12,4 +12,8 @@ public class ManagementServiceImpl implements ManagementService {
 
     private final Logger log = LoggerFactory.getLogger(ManagementService.class);
 
+    @Override
+    public String convertToGetSet(String fieldName, boolean isGet) {
+        return isGet?"get":"set"+((char)(fieldName.charAt(0)-'a'+'A'))+fieldName.substring(1);
+    }
 }

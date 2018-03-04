@@ -4,6 +4,7 @@ import com.lemon.project.ProjectApp;
 
 import com.lemon.project.domain.District;
 import com.lemon.project.repository.DistrictRepository;
+import com.lemon.project.security.SecurityUtils;
 import com.lemon.project.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -80,10 +81,13 @@ public class DistrictResourceIntTest {
 
     private District district;
 
+    @Autowired
+    private SecurityUtils securityUtils;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DistrictResource districtResource = new DistrictResource(districtRepository);
+        final DistrictResource districtResource = new DistrictResource(districtRepository,securityUtils);
         this.restDistrictMockMvc = MockMvcBuilders.standaloneSetup(districtResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -1,0 +1,28 @@
+{
+    "projectApp": {
+        "thana" : {
+            "home": {
+                "title": "Thanas",
+                "createLabel": "Create a new Thana",
+                "createOrEditLabel": "Create or edit a Thana"
+            },
+            "created": "A new Thana is created with identifier {{ param }}",
+            "updated": "A Thana is updated with identifier {{ param }}",
+            "deleted": "A Thana is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Thana {{ id }}?"
+            },
+            "detail": {
+                "title": "Thana"
+            },
+            "name": "Name",
+            "code": "Code",
+            "active": "Active",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifyDate": "Last Modify Date",
+            "district": "District"
+        }
+    }
+}

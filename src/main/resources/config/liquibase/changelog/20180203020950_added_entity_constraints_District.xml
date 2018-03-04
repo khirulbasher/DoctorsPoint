@@ -7,12 +7,12 @@
         Added the constraints for entity District.
     -->
     <changeSet id="20180203020950-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="country_id"
+
+        <addForeignKeyConstraint baseColumnNames="division_id"
                                  baseTableName="district"
-                                 constraintName="fk_district_country_id"
+                                 constraintName="fk_district_division_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="country"/>
+                                 referencedTableName="division"/>
 
     </changeSet>
 </databaseChangeLog>

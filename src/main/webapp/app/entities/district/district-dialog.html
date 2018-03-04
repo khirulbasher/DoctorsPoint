@@ -50,8 +50,8 @@
 
         <div class="row">
             <div class="col-md-6">
-                <label data-translate="projectApp.district.country" for="field_country">Country</label>
-                <select class="form-control" id="field_country" name="country" ng-model="vm.district.country" ng-options="Country as Country.name for Country in vm.countries track by Country.id">
+                <label data-translate="projectApp.district.division" for="field_division">division</label>
+                <select class="form-control" id="field_division" name="division" ng-model="vm.district.division" ng-options="Division as Division.name for Division in vm.divisions track by Division.id">
                     <option value=""></option>
                 </select>
             </div>
@@ -62,12 +62,12 @@
                 <div class="input-margin" id="field_active" >
                     <label class="radio-inline">
                         <input type="radio" name="active" required
-                               ng-checked="vm.district.active == true || vm.district.active==null" name="active"
+                               ng-checked="vm.district.active == true"
                                value="true" ng-model="vm.district.active">
                         <span translate="status.active">active</span></label>
                     <label class="radio-inline">
                         <input type="radio" name="inActive"
-                               ng-checked="vm.district.active == false" name="inActive"
+                               ng-checked="vm.district.active == false"
                                value="false"
                                ng-model="vm.district.active">
                         <span translate="status.inactive">inactive</span></label>

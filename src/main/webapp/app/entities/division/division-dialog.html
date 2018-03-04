@@ -1,0 +1,81 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.division.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.division.name" check-on-database="vm.division.name"
+                       required/>
+                <div ng-show="editForm.name.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.division.code" for="field_code">Code</label>
+                <input type="text" class="form-control" name="code" id="field_code"
+                       ng-model="vm.division.code"
+                       required/>
+                <div ng-show="editForm.code.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.division.latitude" for="field_latitude">Latitude</label>
+                <input type="text" class="form-control" name="latitude" id="field_latitude"
+                       ng-model="vm.division.latitude"
+                />
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.division.longitude" for="field_longitude">Longitude</label>
+                <input type="text" class="form-control" name="longitude" id="field_longitude"
+                       ng-model="vm.division.longitude"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label data-translate="projectApp.division.country" for="field_country">Country</label>
+                <select class="form-control" id="field_country" name="country" ng-model="vm.division.country" ng-options="Country as Country.name for Country in vm.countries track by Country.id">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="control-label" data-translate="entity.activeStatus" for="field_active">Active</label>
+
+                <div class="input-margin" id="field_active" >
+                    <label class="radio-inline">
+                        <input type="radio" name="active" required
+                               ng-checked="vm.division.active == true"
+                               value="true" ng-model="vm.division.active">
+                        <span translate="status.active">active</span></label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inActive"
+                               ng-checked="vm.division.active == false"
+                               value="false"
+                               ng-model="vm.division.active">
+                        <span translate="status.inactive">inactive</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="back('division')">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-pr">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

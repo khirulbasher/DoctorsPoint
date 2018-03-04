@@ -95,6 +95,8 @@ public class EntityDaoImpl implements EntityDao {
                 buffer.append(table.getDeclaredField(fieldNames[i]).getAnnotation(Column.class).name()).append(",");
             }
             buffer.append(table.getDeclaredField(fieldNames[len]).getAnnotation(Column.class).name());
+        }catch (NullPointerException e) {
+            throw new PersistException("Not an Entity");
         } catch (Exception e) {
             throw new PersistException(e);
         }

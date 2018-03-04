@@ -21,6 +21,7 @@ import javax.validation.Valid;
 /**
  * Controller to authenticate users.
  */
+@SuppressWarnings("WeakerAccess")
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {
@@ -53,6 +54,7 @@ public class UserJWTController {
     /**
      * Object to return as body in JWT Authentication.
      */
+    @SuppressWarnings("unused")
     static class JWTToken {
 
         private String idToken;

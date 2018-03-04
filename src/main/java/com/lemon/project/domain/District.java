@@ -49,7 +49,7 @@ public class District implements Serializable {
     private LocalDate lastModifyDate;
 
     @ManyToOne
-    private Country country;
+    private Division division;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -116,13 +116,14 @@ public class District implements Serializable {
         this.lastModifyDate = lastModifyDate;
     }
 
-    public Country getCountry() {
-        return country;
+    public Division getDivision() {
+        return division;
     }
 
-    public void setCountry(Country Country) {
-        this.country = Country;
+    public void setDivision(Division division) {
+        this.division = division;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

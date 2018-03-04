@@ -3,8 +3,8 @@
 	"relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "country",
-            "otherEntityName": "Country",
+            "relationshipName": "division",
+            "otherEntityName": "Division",
 			"relationshipType": "many-to-one",
 			"otherEntityField": "name"
         }

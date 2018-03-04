@@ -1,0 +1,28 @@
+{
+    "projectApp": {
+        "division" : {
+            "home": {
+                "title": "Divisions",
+                "createLabel": "Create a new Division",
+                "createOrEditLabel": "Create or edit a Division"
+            },
+            "created": "A new Division is created with identifier {{ param }}",
+            "updated": "A Division is updated with identifier {{ param }}",
+            "deleted": "A Division is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Division {{ id }}?"
+            },
+            "detail": {
+                "title": "Division"
+            },
+            "name": "Name",
+            "code": "Code",
+            "active": "Active",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifyDate": "Last Modify Date",
+            "country": "Country"
+        }
+    }
+}

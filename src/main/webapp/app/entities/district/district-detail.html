@@ -38,15 +38,15 @@
                     <td>{{getActive(vm.district.active)}}</td>
                 </tr>
                 <tr>
-                    <td data-translate="projectApp.district.country"></td>
-                    <td><a ui-sref="country-detail({id:vm.district.country.id})">{{vm.district.country.name}}</a></td>
+                    <td data-translate="projectApp.district.division"></td>
+                    <td><a ui-sref="division-detail({id:vm.district.division.id})">{{vm.district.division.name}}</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <button type="button"
-            ng-click="clear()"
+            ng-click="back('district')"
             class="btn btn-in">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>

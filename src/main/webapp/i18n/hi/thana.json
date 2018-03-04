@@ -1,0 +1,28 @@
+{
+    "projectApp": {
+        "thana" : {
+            "home": {
+                "title": "Thanas",
+                "createLabel": "नया Thana बनाएँ",
+                "createOrEditLabel": "Thana बनाएँ या संपादित करें"
+            },
+            "created": "एक नया Thana [identifier: {{ param }}] तैयार है",
+            "updated": "एक Thana [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Thana [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Thana [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Thana"
+            },
+            "name": "Name",
+            "code": "Code",
+            "active": "Active",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifyDate": "Last Modify Date",
+            "district": "District"
+        }
+    }
+}

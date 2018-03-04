@@ -3,7 +3,7 @@ package com.lemon.project.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.Country;
 import com.lemon.project.repository.CountryRepository;
-import com.lemon.project.security.SecurityUtils;
+import com.lemon.project.service.EntityService;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,18 +31,17 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class CountryResource {
 
-    private final SecurityUtils securityUtils;
-
     private final Logger log = LoggerFactory.getLogger(CountryResource.class);
 
     private static final String ENTITY_NAME = "country";
 
     private final CountryRepository countryRepository;
+    private final EntityService entityService;
 
     @Inject
-    public CountryResource(CountryRepository countryRepository, SecurityUtils securityUtils) {
+    public CountryResource(CountryRepository countryRepository, EntityService entityService) {
         this.countryRepository = countryRepository;
-        this.securityUtils = securityUtils;
+        this.entityService = entityService;
     }
 
     /**
@@ -65,11 +63,6 @@ public class CountryResource {
         return ResponseEntity.created(new URI("/api/countries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
-    }
-
-    private void modify(Country country) {
-        country.setLastModifiedBy(securityUtils.getCurrentUserId());
-        country.setLastModifyDate(LocalDate.now());
     }
 
     /**
@@ -136,5 +129,13 @@ public class CountryResource {
         log.debug("REST request to delete Country : {}", id);
         countryRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    private void modify(Country country) {
+        try {
+            entityService.modify(country);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

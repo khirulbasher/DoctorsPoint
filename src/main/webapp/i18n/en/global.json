@@ -9,6 +9,8 @@
                 "main": "Entities",
                 "country": "Country",
                 "district": "District",
+                "division": "Division",
+                "thana": "Thana",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

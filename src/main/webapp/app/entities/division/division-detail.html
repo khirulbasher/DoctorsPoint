@@ -1,0 +1,57 @@
+
+<div>
+    <h2><span data-translate="projectApp.division.detail.title">Division</span> {{vm.division.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="table table-hover">
+        <table class="table">
+            <thead>
+                <tr class="">
+                    <th data-translate="entity.field"></th>
+                    <th data-translate="entity.value"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-translate="projectApp.division.name"></td>
+                    <td>{{vm.division.name}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.division.code"></td>
+                    <td>{{vm.division.code}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="entity.activeStatus"></td>
+                    <td>{{getActive(vm.division.active)}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="entity.location"></td>
+                    <td>[Lat:{{vm.division.latitude}} , Lang:{{vm.division.longitude}}]</td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.division.lastModifiedBy"></td>
+                    <td><a ui-sref="user-detail({id:vm.division.lastModifiedBy})">See Details</a> </td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.division.lastModifyDate"></td>
+                    <td>{{vm.division.lastModifyDate | date:'mediumDate'}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.division.country"></td>
+                    <td> <a ui-sref="country-detail({id:vm.division.country.id})">{{vm.division.country.name}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="button"
+            ng-click="back('division')"
+            class="btn btn-in">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="division.edit({id:vm.division.id})" class="btn btn-pr">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

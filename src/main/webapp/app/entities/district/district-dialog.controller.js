@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('DistrictDialogController', DistrictDialogController);
 
-    DistrictDialogController.$inject = ['$timeout', '$scope', 'entity', 'District', 'Country','$state'];
+    DistrictDialogController.$inject = ['$timeout', '$scope', 'entity', 'District', 'Division','$rootScope'];
 
-    function DistrictDialogController ($timeout, $scope, entity, District, Country,$state) {
+    function DistrictDialogController ($timeout, $scope, entity, District, Division,$rootScope) {
         var vm = this;
 
         vm.district = entity;
@@ -15,19 +15,19 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.countries = Country.query();
+        vm.divisions = Division.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
         function clear () {
-            $state.go('district',{},{reload:false});
+            $rootScope.back('district');
         }
 
         function save () {
             vm.isSaving = true;
-            if (vm.district.id !== null) {
+            if (vm.district.id != null) {
                 District.update(vm.district, onSaveSuccess, onSaveError);
             } else {
                 District.save(vm.district, onSaveSuccess, onSaveError);

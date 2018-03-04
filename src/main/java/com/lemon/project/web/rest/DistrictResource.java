@@ -3,7 +3,7 @@ package com.lemon.project.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.District;
 import com.lemon.project.repository.DistrictRepository;
-import com.lemon.project.security.SecurityUtils;
+import com.lemon.project.service.EntityService;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,13 +36,14 @@ public class DistrictResource {
     private static final String ENTITY_NAME = "district";
 
     private final DistrictRepository districtRepository;
-    private final SecurityUtils securityUtils;
+    private final EntityService entityService;
 
     @Inject
-    public DistrictResource(DistrictRepository districtRepository, SecurityUtils securityUtils) {
+    public DistrictResource(DistrictRepository districtRepository, EntityService entityService) {
         this.districtRepository = districtRepository;
-        this.securityUtils = securityUtils;
+        this.entityService = entityService;
     }
+
 
     /**
      * POST  /districts : Create a new district.
@@ -135,7 +135,10 @@ public class DistrictResource {
     }
 
     private void modify(District district) {
-        district.setLastModifiedBy(securityUtils.getCurrentUserId());
-        district.setLastModifyDate(LocalDate.now());
+        try {
+            entityService.modify(district);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

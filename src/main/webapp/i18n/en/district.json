@@ -22,7 +22,7 @@
             "longitude": "Longitude",
             "lastModifiedBy": "Last Modified By",
             "lastModifyDate": "Last Modify Date",
-            "country": "Country"
+            "division": "Division"
         }
     }
 }
