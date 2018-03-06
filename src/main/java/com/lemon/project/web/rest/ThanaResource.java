@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.Thana;
 
 import com.lemon.project.repository.ThanaRepository;
+import com.lemon.project.service.EntityService;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -36,9 +38,11 @@ public class ThanaResource {
     private static final String ENTITY_NAME = "thana";
 
     private final ThanaRepository thanaRepository;
+    private final EntityService entityService;
 
-    public ThanaResource(ThanaRepository thanaRepository) {
+    public ThanaResource(ThanaRepository thanaRepository, EntityService entityService) {
         this.thanaRepository = thanaRepository;
+        this.entityService = entityService;
     }
 
     /**
@@ -55,6 +59,7 @@ public class ThanaResource {
         if (thana.getId() != null) {
             throw new BadRequestAlertException("A new thana cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        modify(thana);
         Thana result = thanaRepository.save(thana);
         return ResponseEntity.created(new URI("/api/thanas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -124,5 +129,17 @@ public class ThanaResource {
         log.debug("REST request to delete Thana : {}", id);
         thanaRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    private void modify(Thana thana) {
+        try {
+            entityService.modify(thana);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,15 +1,18 @@
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDivisionLabel" data-translate="projectApp.division.home.createOrEditLabel">Create or edit a District</h4>
+    </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="row">
             <div class="col-md-6">
                 <label class="control-label" data-translate="projectApp.division.name" for="field_name">Name</label>
-                <input type="text" class="form-control" name="name" id="field_name"
-                       ng-model="vm.division.name" check-on-database="vm.division.name"
+                <input type="text" class="form-control" name="name" id="field_name" value="fdjh"
+                       ng-model="vm.division.name"
                        required/>
-                <div ng-show="editForm.name.$invalid">
+                <div ng-show="editForm.name.$invalid && editForm.name.$dirty">
                     <p class="help-block"
                        ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
                         This field is required.
@@ -19,12 +22,17 @@
             <div class="col-md-6">
                 <label class="control-label" data-translate="projectApp.division.code" for="field_code">Code</label>
                 <input type="text" class="form-control" name="code" id="field_code"
-                       ng-model="vm.division.code"
+                       ng-model="vm.division.code" check-on-database="code" table="division" column="code"
                        required/>
-                <div ng-show="editForm.code.$invalid">
+                <div ng-show="editForm.code.$invalid && editForm.name.$dirty">
                     <p class="help-block"
                        ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
                         This field is required.
+                    </p>
+                </div>
+
+                <div ng-show="editForm.code.$dirty && editForm.code.$error.isUnique">
+                    <p class="unique" data-translate="entity.validation.notUnique">
                     </p>
                 </div>
             </div>

@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('DistrictDialogController', DistrictDialogController);
 
-    DistrictDialogController.$inject = ['$timeout', '$scope', 'entity', 'District', 'Division','$rootScope'];
+    DistrictDialogController.$inject = ['$timeout', '$scope', 'entity', 'District','$rootScope','CustomQuery'];
 
-    function DistrictDialogController ($timeout, $scope, entity, District, Division,$rootScope) {
+    function DistrictDialogController ($timeout, $scope, entity, District,$rootScope,CustomQuery) {
         var vm = this;
 
         vm.district = entity;
@@ -15,7 +15,26 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.divisions = Division.query();
+        vm.countries=[];
+        vm.divisions=[];
+        CustomQuery.query({table:'country',cols:'id,name',where:"NULL"},function (results) {
+            vm.countries=results;
+        });
+
+        $scope.loadDivision = function (id) {
+
+            CustomQuery.query({table:'division',cols:'id,name',where:'country_id = '+id},function (results) {
+                vm.divisions = results;
+            });
+        };
+        if(entity!==null) {
+            var id=entity.division.country.id;
+            $scope.country = {
+                'id': id,
+                'name': entity.division.country.name
+            };
+            $scope.loadDivision(id);
+        }
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -10,6 +10,7 @@ import com.lemon.project.service.EntityDao;
 import com.lemon.project.service.MailService;
 import com.lemon.project.service.UserService;
 import com.lemon.project.service.dto.UserDTO;
+import com.lemon.project.service.dto.Validate;
 import com.lemon.project.utils.exception.PersistException;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.errors.EmailAlreadyUsedException;
@@ -31,7 +32,9 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**

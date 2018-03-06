@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/country/countries.html',
+                    templateUrl: 'app/entities/territory/country/countries.html',
                     controller: 'CountryController',
                     controllerAs: 'vm'
                 }
@@ -60,7 +60,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/country/country-detail.html',
+                    templateUrl: 'app/entities/territory/country/country-detail.html',
                     controller: 'CountryDetailController',
                     controllerAs: 'vm'
                 }
@@ -83,7 +83,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/country/country-dialog.html',
+                    templateUrl: 'app/entities/territory/country/country-dialog.html',
                     controller: 'CountryDialogController',
                     controllerAs: 'vm'
                 }
@@ -106,7 +106,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/country/country-dialog.html',
+                    templateUrl: 'app/entities/territory/country/country-dialog.html',
                     controller: 'CountryDialogController',
                     controllerAs: 'vm'
                 }

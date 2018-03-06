@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('division', {
+        .state('thana', {
             parent: 'entity',
-            url: '/division?page&sort&search',
+            url: '/thana?page&sort&search',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT'],
-                pageTitle: 'projectApp.division.home.title'
+                authorities: ['ROLE_MGT','ROLE_ADMIN'],
+                pageTitle: 'projectApp.thana.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/division/divisions.html',
-                    controller: 'DivisionController',
+                    templateUrl: 'app/entities/territory/thana/thanas.html',
+                    controller: 'ThanaController',
                     controllerAs: 'vm'
                 }
             },
@@ -45,51 +45,51 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('division');
+                    $translatePartialLoader.addPart('thana');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('division-detail', {
-            parent: 'division',
-            url: '/division/{id}',
+        .state('thana-detail', {
+            parent: 'thana',
+            url: '/thana/{id}',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT'],
-                pageTitle: 'projectApp.division.detail.title'
+                authorities: ['ROLE_MGT','ROLE_ADMIN'],
+                pageTitle: 'projectApp.thana.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/division/division-detail.html',
-                    controller: 'DivisionDetailController',
+                    templateUrl: 'app/entities/territory/thana/thana-detail.html',
+                    controller: 'ThanaDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('division');
+                    $translatePartialLoader.addPart('thana');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Division', function($stateParams, Division) {
-                    return Division.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Thana', function($stateParams, Thana) {
+                    return Thana.get({id : $stateParams.id}).$promise;
                 }]
             }
-        }).state('division.new', {
-            parent: 'division',
+        }).state('thana.new', {
+            parent: 'thana',
             url: '/new',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
+                authorities: ['ROLE_MGT','ROLE_ADMIN']
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/division/division-dialog.html',
-                    controller: 'DivisionDialogController',
+                    templateUrl: 'app/entities/territory/thana/thana-dialog.html',
+                    controller: 'ThanaDialogController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('division');
+                    $translatePartialLoader.addPart('thana');
                     return $translate.refresh();
                 }],
                 entity: function () {
@@ -97,34 +97,34 @@
                 }
             }
         })
-        .state('division.edit', {
-            parent: 'division',
+        .state('thana.edit', {
+            parent: 'thana',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
+                authorities: ['ROLE_MGT','ROLE_ADMIN']
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/division/division-dialog.html',
-                    controller: 'DivisionDialogController',
+                    templateUrl: 'app/entities/territory/thana/thana-dialog.html',
+                    controller: 'ThanaDialogController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('division');
+                    $translatePartialLoader.addPart('thana');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Division', function($stateParams, Division) {
-                    return Division.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Thana', function($stateParams, Thana) {
+                    return Thana.get({id : $stateParams.id}).$promise;
                 }]
             }
         })
-        .state('division.delete', {
-            parent: 'division',
+        .state('thana.delete', {
+            parent: 'thana',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
+                authorities: ['ROLE_MGT','ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -133,19 +133,19 @@
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        obj: ['$stateParams','Division','$rootScope', function($stateParams, Division,$rootScope) {
+                        obj: ['$stateParams','Thana','$rootScope', function($stateParams, District,$rootScope) {
                             return {
-                                title:'Division Delete Operation',
+                                title:'Thana Delete Operation',
                                 callback: function() {
-                                    Division.delete({id:$stateParams.id},function () {
-                                        $rootScope.$broadcast('division','loadAll');
+                                    Thana.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('thana','loadAll');
                                     });
                                 }
                             }
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('division', null, { reload: true });
+                    $state.go('district', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

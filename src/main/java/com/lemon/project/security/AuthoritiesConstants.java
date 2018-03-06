@@ -21,4 +21,8 @@ public final class AuthoritiesConstants {
 
     private AuthoritiesConstants() {
     }
+
+    public static String[] getMgtRoles() {
+        return new String[]{ADMIN,ROLE_MGT};
+    }
 }

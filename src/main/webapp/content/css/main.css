@@ -409,3 +409,7 @@ td>a {
     background-color: #46484b;
     outline: 0;
 }
+
+.unique {
+    color: red;
+}

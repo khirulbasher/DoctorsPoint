@@ -4,7 +4,7 @@
             "home": {
                 "title": "Thanas",
                 "createLabel": "Create a new Thana",
-                "createOrEditLabel": "Create or edit a Thana"
+                "createOrEditLabel": "Thana"
             },
             "created": "A new Thana is created with identifier {{ param }}",
             "updated": "A Thana is updated with identifier {{ param }}",
@@ -22,7 +22,9 @@
             "longitude": "Longitude",
             "lastModifiedBy": "Last Modified By",
             "lastModifyDate": "Last Modify Date",
-            "district": "District"
+            "district": "District",
+            "division": "Division",
+            "country": "Country"
         }
     }
 }

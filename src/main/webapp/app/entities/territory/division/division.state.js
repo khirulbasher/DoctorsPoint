@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('district', {
+        .state('division', {
             parent: 'entity',
-            url: '/district?page&sort&search',
+            url: '/division?page&sort&search',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT'],
-                pageTitle: 'projectApp.district.home.title'
+                pageTitle: 'projectApp.division.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/district/districts.html',
-                    controller: 'DistrictController',
+                    templateUrl: 'app/entities/territory/division/divisions.html',
+                    controller: 'DivisionController',
                     controllerAs: 'vm'
                 }
             },
@@ -29,7 +29,7 @@
                     squash: true
                 },
                 sort: {
-                    value: 'name,asc',
+                    value: 'id,asc',
                     squash: true
                 },
                 search: null
@@ -45,52 +45,51 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('district');
+                    $translatePartialLoader.addPart('division');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('district-detail', {
-            parent: 'district',
-            url: '/district/{id}',
+        .state('division-detail', {
+            parent: 'division',
+            url: '/division/{id}',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT'],
-                pageTitle: 'projectApp.district.detail.title'
+                pageTitle: 'projectApp.division.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/district/district-detail.html',
-                    controller: 'DistrictDetailController',
+                    templateUrl: 'app/entities/territory/division/division-detail.html',
+                    controller: 'DivisionDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('district');
+                    $translatePartialLoader.addPart('division');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'District', function($stateParams, District) {
-                    return District.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Division', function($stateParams, Division) {
+                    return Division.get({id : $stateParams.id}).$promise;
                 }]
             }
-        })
-        .state('district.new', {
-            parent: 'district',
+        }).state('division.new', {
+            parent: 'division',
             url: '/new',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/district/district-dialog.html',
-                    controller: 'DistrictDialogController',
+                    templateUrl: 'app/entities/territory/division/division-dialog.html',
+                    controller: 'DivisionDialogController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('district');
+                    $translatePartialLoader.addPart('division');
                     return $translate.refresh();
                 }],
                 entity: function () {
@@ -98,31 +97,31 @@
                 }
             }
         })
-        .state('district.edit', {
-            parent: 'district',
+        .state('division.edit', {
+            parent: 'division',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/district/district-dialog.html',
-                    controller: 'DistrictDialogController',
+                    templateUrl: 'app/entities/territory/division/division-dialog.html',
+                    controller: 'DivisionDialogController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('district');
+                    $translatePartialLoader.addPart('division');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'District', function($stateParams, District) {
-                    return District.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Division', function($stateParams, Division) {
+                    return Division.get({id : $stateParams.id}).$promise;
                 }]
             }
         })
-        .state('district.delete', {
-            parent: 'district',
+        .state('division.delete', {
+            parent: 'division',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT']
@@ -134,19 +133,19 @@
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        obj: ['$stateParams','District','$rootScope', function($stateParams, District,$rootScope) {
+                        obj: ['$stateParams','Division','$rootScope', function($stateParams, Division,$rootScope) {
                             return {
-                                title:'District Delete Operation',
+                                title:'Division Delete Operation',
                                 callback: function() {
-                                    District.delete({id:$stateParams.id},function () {
-                                        $rootScope.$broadcast('district','loadAll');
+                                    Division.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('division','loadAll');
                                     });
                                 }
                             }
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('district', null, { reload: true });
+                    $state.go('division', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

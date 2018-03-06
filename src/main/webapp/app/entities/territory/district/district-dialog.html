@@ -50,12 +50,21 @@
 
         <div class="row">
             <div class="col-md-6">
+                <label data-translate="projectApp.district.country" for="field_country">Country</label>
+                <select class="form-control" id="field_country" ng-change="loadDivision(country.id)" name="country" ng-model="country" ng-options="Country as Country.name for Country in vm.countries track by Country.id">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
                 <label data-translate="projectApp.district.division" for="field_division">division</label>
                 <select class="form-control" id="field_division" name="division" ng-model="vm.district.division" ng-options="Division as Division.name for Division in vm.divisions track by Division.id">
                     <option value=""></option>
                 </select>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-md-6">
                 <label class="control-label" data-translate="entity.activeStatus" for="field_active">Active</label>
 
@@ -79,7 +88,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-pr">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>

@@ -1,6 +1,7 @@
 package com.lemon.project.service.impl;
 
 import com.lemon.project.service.EntityDao;
+import com.lemon.project.service.dto.Validate;
 import com.lemon.project.utils.exception.PersistException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class EntityDaoImpl implements EntityDao {
     }
 
     @Override
+    public List<Map<String, Object>> getColumn(String table, String where) {
+        return getColumn(table, where, "*");
+    }
+
+    @Override
     public <T> List<Map<String, Object>> getColumn(Class<T> table, String where, String columns) {
         return getColumn(getTableNameFromClass(table), where, columns);
     }
@@ -40,6 +46,11 @@ public class EntityDaoImpl implements EntityDao {
     @Override
     public <T> List<Map<String, Object>> getColumn(Class<T> table, String where, String... fieldNames) throws PersistException {
         return getColumn(getTableNameFromClass(table), where, getColumnFromFields(table, fieldNames));
+    }
+
+    @Override
+    public <T> List<Map<String, Object>> getColumn(Class<T> table, String where) {
+        return getColumn(getTableNameFromClass(table), where, "*");
     }
 
     @Override
@@ -81,6 +92,16 @@ public class EntityDaoImpl implements EntityDao {
     @Override
     public <T> Map<String, List<String>> getColumnEfficiently(Class<T> table, String where, String... fieldNames) throws PersistException {
         return getColumnEfficiently(getTableNameFromClass(table), where, getColumnFromFields(table, fieldNames));
+    }
+
+    @Override
+    public boolean checkValidate(Validate validate) {
+        try{
+           String sql="SELECT ID FROM "+validate.getTable()+" WHERE "+validate.getColumn()+" = "+validate.getPreparedValue();
+           return jdbcTemplate.queryForList(sql).size()==0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private String getTableNameFromClass(Class table) {

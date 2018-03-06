@@ -134,10 +134,7 @@ public class Division implements Serializable {
             return false;
         }
         Division division = (Division) o;
-        if (division.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), division.getId());
+        return division.getId() != null && getId() != null && Objects.equals(getId(), division.getId());
     }
 
     @Override

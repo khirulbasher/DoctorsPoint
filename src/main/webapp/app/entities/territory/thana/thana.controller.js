@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('ThanaController', ThanaController);
 
-    ThanaController.$inject = ['$state', 'Thana', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    ThanaController.$inject = ['$state', 'Thana', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function ThanaController($state, Thana, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ThanaController($state, Thana, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,9 @@
                 search: vm.currentSearch
             });
         }
+
+        $scope.$on('thana', function ($event, message) {
+            loadAll();
+        });
     }
 })();

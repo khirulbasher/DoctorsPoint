@@ -17,7 +17,34 @@
             'infinite-scroll',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar'
-        ])
+        ]).directive('checkOnDatabase',['$http',function ($http) {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, elements, attribute, ctrl) {
+                    var validate={
+                        table:attribute.table,
+                        column:attribute.column,
+                        value:attribute.ngModel
+                    };
+                    scope.$watch(attribute.ngModel,function (newVal,oldVal) {
+
+                        if(newVal!=oldVal) {
+                            validate.value=newVal;
+                            $http({
+                                method: 'POST',
+                                url: 'out/utility/checkOnDatabase/',
+                                data: validate
+                            }).success(function (data) {
+                                ctrl.$setValidity('isUnique',data.isUnique);
+                            }).error(function (data) {
+                                ctrl.$setValidity('isUnique',false);
+                            });
+                        }
+                    })
+                }
+            }
+        }])
         .run(run);
 
     run.$inject = ['stateHandler', 'translationHandler','$rootScope','$state'];
@@ -40,20 +67,3 @@
     }
 })();
 
-
-angular.module('ProjectApp',[])
-    .directive('checkOnDatabase',function ($http) {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, ele, attrs, c) {
-                scope.$watch(attrs.ngModel,function (newVal,oldVa) {
-                    if(newVal != oldVal) {
-                        console.log("<><><><><><><><><><><>");
-                        console.log(attrs.ngModel);
-                        console.log("<><><><><><><><><><><>");
-                    }
-                });
-            }
-        }
-    });

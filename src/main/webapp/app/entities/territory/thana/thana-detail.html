@@ -1,0 +1,57 @@
+
+<div>
+    <h2><span data-translate="projectApp.thana.detail.title">Thana</span> {{vm.thana.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="table table-hover">
+        <table class="table">
+            <thead>
+            <tr class="">
+                <th data-translate="entity.field"></th>
+                <th data-translate="entity.value"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-translate="projectApp.thana.name"></td>
+                    <td>{{vm.thana.name}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.thana.code"></td>
+                    <td>{{vm.thana.code}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="entity.activeStatus"></td>
+                    <td>{{getActive(vm.thana.active)}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="entity.location"></td>
+                    <td>[Lat:{{vm.thana.latitude}} , Lang:{{vm.thana.longitude}}]</td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.thana.lastModifiedBy"></td>
+                    <td><a ui-sref="user-detail({id:vm.thana.lastModifiedBy})">See Details</a> </td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.thana.lastModifyDate"></td>
+                    <td>{{vm.thana.lastModifyDate | date:'mediumDate'}}</td>
+                </tr>
+                <tr>
+                    <td data-translate="projectApp.thana.district"></td>
+                    <td><a ui-sref="district-detail({id:vm.thana.district.id})">{{vm.thana.district.name}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ng-click="back('thana')"
+            class="btn btn-in">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="thana.edit({id:vm.thana.id})" class="btn btn-pr">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
