@@ -22,12 +22,16 @@
             <div class="col-md-6">
                 <label class="control-label" data-translate="projectApp.thana.code" for="field_code">Code</label>
                 <input type="text" class="form-control" name="code" id="field_code"
-                       ng-model="vm.thana.code"
+                       ng-model="vm.thana.code" check-on-database="code" table="thana" column="code"
                        required/>
                 <div ng-show="editForm.code.$invalid  && editForm.code.$dirty ">
                     <p class="help-block"
                        ng-show="editForm.code.$error.required" data-translate="entity.validation.required">
                         This field is required.
+                    </p>
+                </div>
+                <div ng-show="editForm.code.$dirty && editForm.code.$error.isUnique">
+                    <p class="unique" data-translate="entity.validation.notUnique">
                     </p>
                 </div>
             </div>

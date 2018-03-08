@@ -177,6 +177,7 @@ public class UserResource {
      */
     @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
         return ResponseUtil.wrapOrNotFound(
@@ -202,8 +203,9 @@ public class UserResource {
     @GetMapping("/userService/{id}")
     @Timed
     @Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_DOCTOR,AuthoritiesConstants.ROLE_HOSPITAL,AuthoritiesConstants.ROLE_CLINIC,AuthoritiesConstants.ROLE_MGT})
-    public ResponseEntity<UserDTO> findOne(@PathVariable Long id) {
-        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthorities(id).map(UserDTO::new));
+    public ResponseEntity<User> findOne(@PathVariable Long id) {
+        System.err.println("<><>");
+        return new ResponseEntity<>(userRepository.findOne(id),HttpStatus.OK);
     }
 
     @PostMapping("/userService")

@@ -114,7 +114,7 @@
                 }]
             }
         }).state('user-detail', {
-            parent: 'user-management',
+            parent: 'entity',
             url: '/{id}',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_HOSPITAL','ROLE_CLINIC','ROLE_DOCTOR'],
@@ -122,7 +122,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/admin/user-management/user-management-detail.html',
+                    templateUrl: 'app/admin/user-management/user-detail.html',
                     controller: 'UserManagementDetailController',
                     controllerAs: 'vm'
                 }
@@ -133,7 +133,7 @@
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'UserService', function($stateParams, UserService) {
-                    return UserService.get({id:$stateParams.id}).$promise;
+                    return UserService.get({id:$stateParams.id}).$promise;//need to restrict for show limited fields...
                 }]
             }
         })

@@ -1,0 +1,38 @@
+<div>
+    <h1>[<b>{{vm.user.login}}</b>]</h1>
+    <div class="table table-hover">
+        <table class="table">
+            <thead>
+            <tr class="">
+                <th data-translate="entity.field"></th>
+                <th data-translate="entity.value"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td data-translate="userManagement.login"></td>
+                <td><span>{{vm.user.login}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td data-translate="userManagement.firstName"></td>
+                <td>{{vm.user.firstName}}</td>
+            </tr>
+            <tr>
+                <td data-translate="userManagement.lastName"></td>
+                <td>{{vm.user.lastName}}</td>
+            </tr>
+            <tr>
+                <td data-translate="userManagement.email"></td>
+                <td>{{vm.user.email}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="button"
+            ng-click="back('user-management',false)"
+            class="btn btn-in">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+</div>
