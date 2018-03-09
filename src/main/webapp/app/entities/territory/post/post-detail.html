@@ -1,0 +1,51 @@
+
+<div>
+    <h1><span data-translate="projectApp.post.detail.title">Post</span> {{vm.post.name+':'+vm.post.postCode}}</h1>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="projectApp.post.name">Name</span></dt>
+        <dd>
+            <span>{{vm.post.name}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.postCode">Post Code</span></dt>
+        <dd>
+            <span>{{vm.post.postCode}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.active">Active</span></dt>
+        <dd>
+            <span>{{vm.post.active}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{vm.post.latitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{vm.post.longitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.post.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+            <span>{{vm.post.lastModifyDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.post.thana">Thana</span></dt>
+        <dd>
+            <a ui-sref="thana-detail({id:vm.post.thana.id})">{{vm.post.thana.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="button"
+            ng-click="back('post')"
+            class="btn btn-in">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="post-detail.edit({id:vm.post.id})" class="btn btn-pr">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

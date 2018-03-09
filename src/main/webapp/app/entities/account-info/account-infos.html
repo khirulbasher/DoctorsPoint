@@ -1,0 +1,88 @@
+<div>
+    <h2 data-translate="projectApp.accountInfo.home.title">Account Infos</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="account-info.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="projectApp.accountInfo.home.createLabel">
+                        Create new Account Info
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="firstName"><span data-translate="projectApp.accountInfo.firstName">First Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastName"><span data-translate="projectApp.accountInfo.lastName">Last Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span data-translate="projectApp.accountInfo.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span data-translate="projectApp.accountInfo.active">Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="latitude"><span data-translate="projectApp.accountInfo.latitude">Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longitude"><span data-translate="projectApp.accountInfo.longitude">Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="projectApp.accountInfo.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifyDate"><span data-translate="projectApp.accountInfo.lastModifyDate">Last Modify Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="birthDate"><span data-translate="projectApp.accountInfo.birthDate">Birth Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userId"><span data-translate="projectApp.accountInfo.userId">User Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="village"><span data-translate="projectApp.accountInfo.village">Village</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="thana.name"><span data-translate="projectApp.accountInfo.thana">Thana</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="post.postCode"><span data-translate="projectApp.accountInfo.post">Post</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="accountInfo in vm.accountInfos track by accountInfo.id">
+                    <td><a ui-sref="account-info-detail({id:accountInfo.id})">{{accountInfo.id}}</a></td>
+                    <td>{{accountInfo.firstName}}</td>
+                    <td>{{accountInfo.lastName}}</td>
+                    <td>{{accountInfo.email}}</td>
+                    <td>{{accountInfo.active}}</td>
+                    <td>{{accountInfo.latitude}}</td>
+                    <td>{{accountInfo.longitude}}</td>
+                    <td>{{accountInfo.lastModifiedBy}}</td>
+                        <td>{{accountInfo.lastModifyDate | date:'mediumDate'}}</td>
+                        <td>{{accountInfo.birthDate | date:'mediumDate'}}</td>
+                    <td>{{accountInfo.userId}}</td>
+                    <td>{{accountInfo.village}}</td>
+                    <td>
+                        <a ui-sref="thana-detail({id:accountInfo.thana.id})">{{accountInfo.thana.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="post-detail({id:accountInfo.post.id})">{{accountInfo.post.postCode}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="account-info-detail({id:accountInfo.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="account-info.edit({id:accountInfo.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="account-info.delete({id:accountInfo.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

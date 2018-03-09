@@ -5,13 +5,10 @@
         .module('projectApp')
         .controller('CountryDetailController', CountryDetailController);
 
-    CountryDetailController.$inject = ['$scope', '$state', 'entity'];
+    CountryDetailController.$inject = ['entity'];
 
-    function CountryDetailController($scope, $state, entity) {
+    function CountryDetailController(entity) {
         var vm = this;
         vm.country = entity;
-        vm.cancel = function() {
-            $state.go('country',{},{reload:false});
-        };
     }
 })();

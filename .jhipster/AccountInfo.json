@@ -1,0 +1,88 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "thana",
+            "otherEntityName": "Thana",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "post",
+            "otherEntityName": "Post",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "postCode"
+        }
+    ],
+
+    "fields" : [
+        {
+            "fieldId" : 1,
+            "fieldName" : "firstName",
+            "fieldType" : "String",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 2,
+            "fieldName" : "lastName",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 3,
+            "fieldName" : "email",
+            "fieldType" : "String",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 4,
+            "fieldName" : "active",
+            "fieldType" : "Boolean",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 5,
+            "fieldName" : "latitude",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 6,
+            "fieldName" : "longitude",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 7,
+            "fieldName" : "lastModifiedBy",
+            "fieldType" : "Long"
+        },
+        {
+            "fieldId" : 8,
+            "fieldName" : "lastModifyDate",
+            "fieldType" : "LocalDate"
+        },
+        {
+            "fieldId" : 9,
+            "fieldName" : "birthDate",
+            "fieldType" : "LocalDate"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "village",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180304020950",
+    "dto": "no",
+    "pagination": "pagination"
+}

@@ -3,11 +3,11 @@
 
     angular
         .module('projectApp')
-        .controller('CountryController', CountryController);
+        .controller('PostController', PostController);
 
-    CountryController.$inject = ['$state', 'Country', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
+    PostController.$inject = ['$state', 'Post', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function CountryController($state, Country, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
+    function PostController($state, Post, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -20,7 +20,7 @@
         loadAll();
 
         function loadAll () {
-            Country.query({
+            Post.query({
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -36,7 +36,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.countries = data;
+                vm.posts = data;
                 vm.page = pagingParams.page;
             }
             function onError(error) {
@@ -56,13 +56,5 @@
                 search: vm.currentSearch
             });
         }
-
-        vm.delete=function(id) {
-            $state.go('country.delete',{id:id,callback:vm.call});
-        };
-
-        $scope.$on('country',function($event,message){
-            loadAll();
-        });
     }
 })();

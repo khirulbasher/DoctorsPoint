@@ -1,0 +1,33 @@
+{
+    "projectApp": {
+        "accountInfo" : {
+            "home": {
+                "title": "AccountInfos",
+                "createLabel": "नया Account Info बनाएँ",
+                "createOrEditLabel": "Account Info बनाएँ या संपादित करें"
+            },
+            "created": "एक नया Account Info [identifier: {{ param }}] तैयार है",
+            "updated": "एक Account Info [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Account Info [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Account Info [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Account Info"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "active": "Active",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifyDate": "Last Modify Date",
+            "birthDate": "Birth Date",
+            "userId": "User Id",
+            "village": "Village",
+            "thana": "Thana",
+            "post": "Post"
+        }
+    }
+}

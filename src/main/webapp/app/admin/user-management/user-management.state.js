@@ -114,7 +114,7 @@
                 }]
             }
         }).state('user-detail', {
-            parent: 'entity',
+            parent: 'account-info',
             url: '/{id}',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_HOSPITAL','ROLE_CLINIC','ROLE_DOCTOR'],

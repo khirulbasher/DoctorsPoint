@@ -1,0 +1,71 @@
+
+<div>
+    <h2><span data-translate="projectApp.accountInfo.detail.title">Account Info</span> {{vm.accountInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="projectApp.accountInfo.firstName">First Name</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.firstName}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.lastName}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.email">Email</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.email}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.active">Active</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.active}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.latitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.longitude}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.lastModifyDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.birthDate">Birth Date</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.birthDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.userId">User Id</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.userId}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.village">Village</span></dt>
+        <dd>
+            <span>{{vm.accountInfo.village}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.thana">Thana</span></dt>
+        <dd>
+            <a ui-sref="thana-detail({id:vm.accountInfo.thana.id})">{{vm.accountInfo.thana.name}}</a>
+        </dd>
+        <dt><span data-translate="projectApp.accountInfo.post">Post</span></dt>
+        <dd>
+            <a ui-sref="post-detail({id:vm.accountInfo.post.id})">{{vm.accountInfo.post.postCode}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="account-info-detail.edit({id:vm.accountInfo.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
