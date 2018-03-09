@@ -110,7 +110,8 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Setting up Continuous Integration]: http://www.jhipster.tech/documentation-archive/v4.13.2/setting-up-ci/
 
 [Gatling]: http://gatling.io/
-[Node.js]: https://nodejs.org/
+[Node.js]: https://nodejs.org/.   V:9.4.0
+
 [Yarn]: https://yarnpkg.org/
 [Bower]: http://bower.io/
 [Gulp]: http://gulpjs.com/

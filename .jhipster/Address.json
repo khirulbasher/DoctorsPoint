@@ -1,0 +1,50 @@
+{
+	"relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "thana",
+            "otherEntityName": "Thana",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "name"
+        }
+    ],
+
+	"fields" : [
+        {
+            "fieldId" : 1,
+            "fieldName" : "village",
+            "fieldType" : "String",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 2,
+            "fieldName" : "post",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 3,
+            "fieldName" : "latitude",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 4,
+            "fieldName" : "longitude",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 5,
+            "fieldName" : "lastModifiedBy",
+            "fieldType" : "Long"
+        },
+        {
+            "fieldId" : 6,
+            "fieldName" : "lastModifyDate",
+            "fieldType" : "LocalDate"
+        }
+	],
+	"changelogDate": "20180309020950",
+    "dto": "no",
+    "pagination": "pagination"
+}
