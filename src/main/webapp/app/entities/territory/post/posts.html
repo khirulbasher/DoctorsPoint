@@ -18,13 +18,10 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span data-translate="global.field.sl"></span></th>
                     <th jh-sort-by="name"><span data-translate="projectApp.post.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="postCode"><span data-translate="projectApp.post.postCode">Post Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="active"><span data-translate="projectApp.post.active">Active</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="latitude"><span data-translate="projectApp.post.latitude">Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="longitude"><span data-translate="projectApp.post.longitude">Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedBy"><span data-translate="projectApp.post.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifyDate"><span data-translate="projectApp.post.lastModifyDate">Last Modify Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="thana.name"><span data-translate="projectApp.post.thana">Thana</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -32,14 +29,11 @@
             </thead>
             <tbody>
                 <tr ng-repeat="post in vm.posts track by post.id">
-                    <td><a ui-sref="post-detail({id:post.id})">{{post.id}}</a></td>
-                    <td>{{post.name}}</td>
+                    <td>{{$index+1}}</td>
+                    <td><a ui-sref="post-detail({id:post.id})">{{post.name}}</a></td>
                     <td>{{post.postCode}}</td>
-                    <td>{{post.active}}</td>
-                    <td>{{post.latitude}}</td>
-                    <td>{{post.longitude}}</td>
-                    <td>{{post.lastModifiedBy}}</td>
-                        <td>{{post.lastModifyDate | date:'mediumDate'}}</td>
+                    <td>{{getActive(post.active)}}</td>
+                    <td>{{post.lastModifyDate | date:'mediumDate'}}</td>
                     <td>
                         <a ui-sref="thana-detail({id:post.thana.id})">{{post.thana.name}}</a>
                     </td>

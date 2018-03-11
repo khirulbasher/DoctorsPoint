@@ -34,6 +34,7 @@
 
         function save () {
             vm.isSaving = true;
+            if(vm.user.active == null) vm.user.active = true;
             if (vm.user.id != null) {
                 User.update(vm.user, onSaveSuccess, onSaveError);
             } else {

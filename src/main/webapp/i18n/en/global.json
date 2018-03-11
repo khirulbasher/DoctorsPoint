@@ -13,7 +13,8 @@
                 "thana": "Thana",
                 "post": "Post",
                 "accountInfo": "Account Info",
-                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
+                "territory": "Territory"
             },
             "account": {
                 "main": "Account",

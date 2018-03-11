@@ -46,6 +46,7 @@
 
         function save () {
             vm.isSaving = true;
+            if(vm.district.active == null) vm.district.active = true;
             if (vm.district.id != null) {
                 District.update(vm.district, onSaveSuccess, onSaveError);
             } else {

@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
@@ -54,34 +55,56 @@ public class EntityDaoImpl implements EntityDao {
     }
 
     @Override
+    public List<Map<String, String>> getColumn(String table, String where, long limit, String columns) throws PersistException {
+        return null;
+    }
+
+    @Override
+    public <T> List<Map<String, String>> getColumn(Class<T> table, String where, long limit, String columns) throws PersistException {
+        return getColumn(getTableNameFromClass(table), where,limit, columns);
+    }
+
+    @Override
+    public <T> List<Map<String, String>> getColumn(Class<T> table, String where, long limit, String... fieldNames) throws PersistException {
+        return getColumn(getTableNameFromClass(table), where,limit, getColumnFromFields(table, fieldNames));
+    }
+
+    @Override
     public Map<String, List<String>> getColumnEfficiently(String table, String where, String columns) throws PersistException {
         String[] cols = columns.split(",");
-        int len = cols.length;
-        if (len <= 0) throw new PersistException("No Column Selected");
+        int len=cols.length;
         Map<String, List<String>> listMap;
-        try (Connection connection = jdbcTemplate.getDataSource().getConnection(); Statement statement = connection.createStatement()) {
-            StringBuffer buffer = new StringBuffer();
-            buffer.append("SELECT ");
-            String colName;
-            listMap = new HashMap<>();
-            for (int i = 0; i < len; i++) {
-                colName = cols[i];
-                listMap.put(colName, new LinkedList<>());
-            }
-            buffer.append(columns).append(" FROM ").append(table);
-            if(where!=null) buffer.append(" WHERE ").append(where);
-            ResultSet resultSet = statement.executeQuery(buffer.toString());
-            Set<String> columnSet = listMap.keySet();
+        ResultSet resultSet=getResultSet(table,where,columns,null);
+        if(resultSet!=null) listMap=new HashMap<>();
+        else return null;
+        for (int i = 0; i < len; i++)
+            listMap.put(cols[i], new LinkedList<>());
+        Set<String> columnSet = listMap.keySet();
+        try {
             while (resultSet.next()) {
                 for (String columnName : columnSet) {
                     listMap.get(columnName).add(resultSet.getObject(columnName).toString());
                 }
             }
+        } catch (SQLException e) {
+            throw new PersistException(e);
+        }
+        return listMap;
+    }
+
+    private ResultSet getResultSet(String table, String where, String columns,Long limit) throws PersistException {
+        if (columns.isEmpty()) throw new PersistException("No Column Selected");
+        try (Connection connection = jdbcTemplate.getDataSource().getConnection(); Statement statement = connection.createStatement()) {
+            StringBuffer buffer = new StringBuffer();
+            buffer.append("SELECT ");
+            buffer.append(columns).append(" FROM ").append(table);
+            if(where!=null) buffer.append(" WHERE ").append(where);
+            if(limit!=null) buffer.append(" LIMIT ").append(limit);
+            return statement.executeQuery(buffer.toString());
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistException(e);
         }
-        return listMap;
     }
 
     @Override

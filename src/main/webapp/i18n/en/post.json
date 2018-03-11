@@ -22,7 +22,10 @@
             "longitude": "Longitude",
             "lastModifiedBy": "Last Modified By",
             "lastModifyDate": "Last Modify Date",
-            "thana": "Thana"
+            "thana": "Thana",
+            "district": "District",
+            "division": "Division",
+            "country": "Country"
         }
     }
 }

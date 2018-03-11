@@ -17,6 +17,12 @@ public interface EntityDao {
 
     <T> List<Map<String, Object>> getColumn(Class<T> table, String where) throws PersistException; /*List<Map<String,Object>> maps = entityDao.getColumn("Country","active = true","name,id,latitude,longitude");*/
 
+    List<Map<String,String>> getColumn(String table, String where, long limit, String columns) throws PersistException;
+
+    <T> List<Map<String,String>> getColumn(Class<T> table, String where, long limit, String columns) throws PersistException;
+
+    <T> List<Map<String,String>> getColumn(Class<T> table, String where,long limit, String... fieldNames) throws PersistException;
+
     Map<String, List<String>> getColumnEfficiently(String table, String where, String columns) throws PersistException;
 
     <T> Map<String, List<String>> getColumnEfficiently(Class<T> table, String where, String columns) throws PersistException;

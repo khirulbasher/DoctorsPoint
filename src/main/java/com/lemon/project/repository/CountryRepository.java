@@ -1,9 +1,12 @@
 package com.lemon.project.repository;
 
 import com.lemon.project.domain.Country;
+import feign.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+
+import java.util.List;
 
 
 /**
@@ -13,4 +16,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
+    @Query("SELECT model FROM Country model WHERE model.id >= :fromId AND COUNT(model)<=:limitNo")
+    List<Country> findAllByLimit(@Param("limitNo") Long limitNo,@Param("fromId") Long fromId);
 }

@@ -128,13 +128,20 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/territory/post/post-delete-dialog.html',
-                    controller: 'PostDeleteController',
+                    templateUrl: 'app/entities/entity-global-dialog.html',
+                    controller: 'EntityGlobalController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Post', function(Post) {
-                            return Post.get({id : $stateParams.id}).$promise;
+                        obj: ['$stateParams','Post','$rootScope', function($stateParams, Post,$rootScope) {
+                            return {
+                                title:'Post Delete Operation',
+                                callback: function() {
+                                    Post.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('post','loadAll');
+                                    });
+                                }
+                            }
                         }]
                     }
                 }).result.then(function() {

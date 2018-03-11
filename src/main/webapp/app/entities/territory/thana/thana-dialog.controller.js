@@ -50,6 +50,7 @@
 
         function save () {
             vm.isSaving = true;
+            if(vm.thana.active == null) vm.thana.active = true;
             if (vm.thana.id !== null) {
                 Thana.update(vm.thana, onSaveSuccess, onSaveError);
             } else {

@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('PostController', PostController);
 
-    PostController.$inject = ['$state', 'Post', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    PostController.$inject = ['$state', 'Post', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function PostController($state, Post, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function PostController($state, Post, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,9 @@
                 search: vm.currentSearch
             });
         }
+
+        $scope.$on('post', function ($event, message) {
+            loadAll();
+        });
     }
 })();

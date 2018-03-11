@@ -1,42 +1,49 @@
 
 <div>
-    <h1><span data-translate="projectApp.post.detail.title">Post</span> {{vm.post.name+':'+vm.post.postCode}}</h1>
+    <h1>{{vm.post.name+':'+vm.post.postCode}}</h1>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="projectApp.post.name">Name</span></dt>
-        <dd>
-            <span>{{vm.post.name}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.postCode">Post Code</span></dt>
-        <dd>
-            <span>{{vm.post.postCode}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.active">Active</span></dt>
-        <dd>
-            <span>{{vm.post.active}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.latitude">Latitude</span></dt>
-        <dd>
-            <span>{{vm.post.latitude}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.longitude">Longitude</span></dt>
-        <dd>
-            <span>{{vm.post.longitude}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vm.post.lastModifiedBy}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.lastModifyDate">Last Modify Date</span></dt>
-        <dd>
-            <span>{{vm.post.lastModifyDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.post.thana">Thana</span></dt>
-        <dd>
-            <a ui-sref="thana-detail({id:vm.post.thana.id})">{{vm.post.thana.name}}</a>
-        </dd>
-    </dl>
+
+    <div class="table table-hover">
+        <table class="table">
+            <thead>
+            <tr class="">
+                <th data-translate="entity.field"></th>
+                <th data-translate="entity.value"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td data-translate="projectApp.post.name"></td>
+                <td>{{vm.post.name}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.post.code"></td>
+                <td>{{vm.post.postCode}}</td>
+            </tr>
+            <tr>
+                <td data-translate="entity.activeStatus"></td>
+                <td>{{getActive(vm.post.active)}}</td>
+            </tr>
+            <tr>
+                <td data-translate="entity.location"></td>
+                <td>[Lat:{{vm.post.latitude}} , Lang:{{vm.post.longitude}}]</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.post.lastModifiedBy"></td>
+                <td><a ui-sref="user-detail({id:vm.post.lastModifiedBy})">See Details</a> </td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.post.lastModifyDate"></td>
+                <td>{{vm.post.lastModifyDate | date:'mediumDate'}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.post.thana"></td>
+                <td><a ui-sref="thana-detail({id:vm.post.thana.id})">{{vm.post.thana.name}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <button type="button"
             ng-click="back('post')"

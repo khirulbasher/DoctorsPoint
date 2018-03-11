@@ -21,12 +21,13 @@
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
+
+                <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="menu_territory">
                         <span>
                             <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" data-translate="global.menu.entities.main">
-                                Entities
+                            <span class="hidden-sm" data-translate="global.menu.entities.territory">
+                                territory
                             </span>
                             <b class="caret"></b>
                         </span>
@@ -57,12 +58,57 @@
                             </a>
                         </li>
                         <li ui-sref-active="active">
+                            <a ui-sref="post" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span data-translate="global.menu.entities.post">Post</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
+                        <span>
+                            <span class="glyphicon glyphicon-th-list"></span>
+                            <span class="hidden-sm" data-translate="global.menu.entities.main">
+                                Entities
+                            </span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+
+                    <ul class="dropdown-menu" uib-dropdown-menu>
+                        <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ui-sref-active="active">
+                            <a ui-sref="country" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span data-translate="global.menu.entities.country">Country</span>
+                            </a>
+                        </li>
+                        <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ui-sref-active="active">
+                            <a ui-sref="division" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span data-translate="global.menu.entities.division">Division</span>
+                            </a>
+                        </li>
+                        <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ui-sref-active="active">
+                            <a ui-sref="district" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span data-translate="global.menu.entities.district">District</span>
+                            </a>
+                        </li>
+                        <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ui-sref-active="active">
+                            <a ui-sref="thana" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span data-translate="global.menu.entities.thana">Thana</span>
+                            </a>
+                        </li>
+                        <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ui-sref-active="active">
                                 <a ui-sref="post" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.post">Post</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                        <li has-any-authority="ROLE_ADMIN,ROLE_MGT" ui-sref-active="active">
                                 <a ui-sref="account-info" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="global.menu.entities.accountInfo">Account Info</span>

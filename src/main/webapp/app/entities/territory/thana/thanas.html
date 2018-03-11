@@ -32,7 +32,7 @@
                     <td>{{$index+1}}</td>
                     <td><a ui-sref="thana-detail({id:thana.id})">{{thana.name}}</a></td>
                     <td>{{thana.code}}</td>
-                    <td>{{thana.active}}</td>
+                    <td>{{getActive(thana.active)}}</td>
                     <td>{{thana.lastModifyDate | date:'mediumDate'}}</td>
                     <td>
                         <a ui-sref="district-detail({id:thana.district.id})">{{thana.district.name}}</a>

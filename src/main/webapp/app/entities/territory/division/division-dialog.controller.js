@@ -23,6 +23,7 @@
 
         function save () {
             vm.isSaving = true;
+            if(vm.division.active == null) vm.division.active = true;
             if (vm.division.id != null) {
                 Division.update(vm.division, onSaveSuccess, onSaveError);
             } else {

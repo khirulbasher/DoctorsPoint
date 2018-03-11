@@ -26,6 +26,7 @@
 
         function save () {
             vm.isSaving = true;
+            if(vm.country.active == null) vm.country.active = true;
             if (vm.country.id != null) {
                 Country.update(vm.country, onSaveSuccess, onSaveError);
             } else {

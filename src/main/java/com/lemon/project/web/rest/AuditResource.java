@@ -1,5 +1,6 @@
 package com.lemon.project.web.rest;
 
+import com.lemon.project.security.AuthoritiesConstants;
 import com.lemon.project.service.AuditEventService;
 import com.lemon.project.web.rest.util.PaginationUtil;
 
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/management/audits")
+@Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_MGT})
 public class AuditResource {
 
     private final AuditEventService auditEventService;

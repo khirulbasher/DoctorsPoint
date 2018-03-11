@@ -80,15 +80,15 @@
 
                 <div class="input-margin" id="field_active" >
                     <label class="radio-inline">
-                        <input type="radio" name="active" required
-                               ng-checked="vm.thana.active == true"
-                               value="true" ng-model="vm.thana.active">
+                        <input type="radio" name="active"
+                               ng-checked="vm.thana.active == true || vm.thana.id == null"
+                               ng-value="true" data-ng-model="vm.thana.active">
                         <span translate="status.active">active</span></label>
                     <label class="radio-inline">
                         <input type="radio" name="inActive"
                                ng-checked="vm.thana.active == false"
-                               value="false"
-                               ng-model="vm.thana.active">
+                               ng-value="false"
+                               data-ng-model="vm.thana.active">
                         <span translate="status.inactive">inactive</span></label>
                 </div>
             </div>
