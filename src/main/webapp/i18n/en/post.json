@@ -4,7 +4,7 @@
             "home": {
                 "title": "Posts",
                 "createLabel": "Create a new Post",
-                "createOrEditLabel": "Create or edit a Post"
+                "createOrEditLabel": "Post"
             },
             "created": "A new Post is created with identifier {{ param }}",
             "updated": "A Post is updated with identifier {{ param }}",

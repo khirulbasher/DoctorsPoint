@@ -44,6 +44,17 @@
             });
         };
 
+        if(entity!=null) {
+            vm.post.thana= entity.thana;
+            $scope.district= entity.thana.district;
+            $scope.division = $scope.district.division;
+            $scope.country = $scope.division.country;
+
+            $scope.loadDivision($scope.country.id);
+            $scope.loadDistrict($scope.division.id);
+            $scope.loadThana($scope.district.id);
+        }
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
