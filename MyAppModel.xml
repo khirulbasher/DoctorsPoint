@@ -1,0 +1,11 @@
+Create a Content Provider
+
+Create A Background Service : REDELIVERY INTENT
+
+In Background Service every 5min After it request To the Server with latest Message or Notification Id;
+and download all Notification/message from Server greater than current ID;
+if it's the initial period of the Application then it only fetch last days Notification.
+
+Then Stored all on Database, and send Notification to the user that, You have some message.
+when user click on notification it start showing the all Notification and Messages from database desc order.
+
