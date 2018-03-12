@@ -23,7 +23,7 @@ import java.util.Optional;
 @SuppressWarnings({"unused", "FieldCanBeLocal", "StringBufferMayBeStringBuilder", "ConstantConditions", "RedundantThrows"})
 @RestController
 @RequestMapping("/out")
-@Secured({AuthoritiesConstants.ROLE_MGT,AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_DOCTOR,AuthoritiesConstants.ROLE_HOSPITAL,AuthoritiesConstants.ROLE_CLINIC})
+@Secured({AuthoritiesConstants.ROLE_MGT,AuthoritiesConstants.ADMIN})
 public class UtilityResource {
     private final EntityDao entityDao;
     private static final String[] secureTables;
