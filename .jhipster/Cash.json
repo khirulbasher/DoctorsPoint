@@ -1,0 +1,45 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "user",
+            "otherEntityName": "User",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "lastTransactionId",
+            "otherEntityName": "Transaction",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+
+    "fields" : [
+        {
+            "fieldId" : 1,
+            "fieldName" : "cash",
+            "fieldType" : "BigDecimal",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 2,
+            "fieldName" : "lastTransactionDate",
+            "fieldType" : "LocalDate"
+        },
+        {
+            "fieldId" : 3,
+            "fieldName" : "transactionType",
+            "fieldType" : "TransactionType",
+            "fieldValues": "CASH_IN,CASH_OUT,CASH_ACCEPT,CASH_SEND,PAYMENT,INVEST,INTERNAL,SALARY"
+        }
+    ],
+    "changelogDate": "20180313020950",
+    "dto": "no",
+    "pagination": "pagination"
+}

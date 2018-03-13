@@ -1,0 +1,25 @@
+{
+    "projectApp": {
+        "cash" : {
+            "home": {
+                "title": "Cash",
+                "createLabel": "नया Cash बनाएँ",
+                "createOrEditLabel": "Cash बनाएँ या संपादित करें"
+            },
+            "created": "एक नया Cash [identifier: {{ param }}] तैयार है",
+            "updated": "एक Cash [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Cash [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Cash [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Cash"
+            },
+            "cash": "Cash",
+            "lastTransactionDate": "Last Transaction Date",
+            "transactionType": "Transaction Type",
+            "user": "User",
+            "lastTransactionId": "Last Transaction Id"
+        }
+    }
+}

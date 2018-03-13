@@ -1,0 +1,72 @@
+<div>
+    <h2 data-translate="projectApp.cash.home.title">Cash</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="cash.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="projectApp.cash.home.createLabel">
+                        Create new Cash
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cash"><span data-translate="projectApp.cash.cash">Cash</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastTransactionDate"><span data-translate="projectApp.cash.lastTransactionDate">Last Transaction Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="transactionType"><span data-translate="projectApp.cash.transactionType">Transaction Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.id"><span data-translate="projectApp.cash.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastTransactionId.id"><span data-translate="projectApp.cash.lastTransactionId">Last Transaction Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cash in vm.cash track by cash.id">
+                    <td><a ui-sref="cash-detail({id:cash.id})">{{cash.id}}</a></td>
+                    <td>{{cash.cash}}</td>
+                        <td>{{cash.lastTransactionDate | date:'mediumDate'}}</td>
+                    <td data-translate="{{'projectApp.TransactionType.' + cash.transactionType}}">{{cash.transactionType}}</td>
+                    <td>
+                        <a ui-sref="user-detail({id:cash.user.id})">{{cash.user.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="transaction-detail({id:cash.lastTransactionId.id})">{{cash.lastTransactionId.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="cash-detail({id:cash.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="cash.edit({id:cash.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="cash.delete({id:cash.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

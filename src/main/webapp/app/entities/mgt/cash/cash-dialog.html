@@ -1,0 +1,77 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCashLabel" data-translate="projectApp.cash.home.createOrEditLabel">Create or edit a Cash</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.cash.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.cash.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.cash.cash" for="field_cash">Cash</label>
+            <input type="number" class="form-control" name="cash" id="field_cash"
+                    ng-model="vm.cash.cash"
+                    required/>
+            <div ng-show="editForm.cash.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.cash.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.cash.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.cash.lastTransactionDate" for="field_lastTransactionDate">Last Transaction Date</label>
+                <div class="input-group">
+                    <input id="field_lastTransactionDate" type="text" class="form-control" name="lastTransactionDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.cash.lastTransactionDate" is-open="vm.datePickerOpenStatus.lastTransactionDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastTransactionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.cash.transactionType" for="field_transactionType">Transaction Type</label>
+            <select class="form-control" name="transactionType" ng-model="vm.cash.transactionType" id="field_transactionType">
+                <option value="CASH_IN" data-translate="projectApp.TransactionType.CASH_IN">CASH_IN</option>
+                <option value="CASH_OUT" data-translate="projectApp.TransactionType.CASH_OUT">CASH_OUT</option>
+                <option value="CASH_ACCEPT" data-translate="projectApp.TransactionType.CASH_ACCEPT">CASH_ACCEPT</option>
+                <option value="CASH_SEND" data-translate="projectApp.TransactionType.CASH_SEND">CASH_SEND</option>
+                <option value="PAYMENT" data-translate="projectApp.TransactionType.PAYMENT">PAYMENT</option>
+                <option value="INVEST" data-translate="projectApp.TransactionType.INVEST">INVEST</option>
+                <option value="INTERNAL" data-translate="projectApp.TransactionType.INTERNAL">INTERNAL</option>
+                <option value="SALARY" data-translate="projectApp.TransactionType.SALARY">SALARY</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="projectApp.cash.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.cash.user" ng-options="User as User.id for User in vm.users | orderBy:'id' track by User.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="projectApp.cash.lastTransactionId" for="field_lastTransactionId">Last Transaction Id</label>
+            <select class="form-control" id="field_lastTransactionId" name="lastTransactionId" ng-model="vm.cash.lastTransactionId" ng-options="Transaction as Transaction.id for Transaction in vm.lasttransactionids | orderBy:'id' track by Transaction.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

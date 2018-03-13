@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/thana?page&sort&search',
             data: {
-                authorities: ['ROLE_MGT','ROLE_ADMIN'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY'],
                 pageTitle: 'projectApp.thana.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'thana',
             url: '/thana/{id}',
             data: {
-                authorities: ['ROLE_MGT','ROLE_ADMIN'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY'],
                 pageTitle: 'projectApp.thana.detail.title'
             },
             views: {
@@ -78,7 +78,7 @@
             parent: 'thana',
             url: '/new',
             data: {
-                authorities: ['ROLE_MGT','ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY']
             },
             views: {
                 'content@': {
@@ -101,7 +101,7 @@
             parent: 'thana',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_MGT','ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY']
             },
             views: {
                 'content@': {
@@ -124,7 +124,7 @@
             parent: 'thana',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_MGT','ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

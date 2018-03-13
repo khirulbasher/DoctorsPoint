@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/country?page&sort&search',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY'],
                 pageTitle: 'projectApp.country.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'country',
             url: '/detail/{id}',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT'],
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY'],
                 pageTitle: 'projectApp.country.detail.title'
             },
             views: {
@@ -79,7 +79,7 @@
             parent: 'country',
             url: '/new',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY']
             },
             views: {
                 'content@': {
@@ -102,7 +102,7 @@
             parent: 'country',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY']
             },
             views: {
                 'content@': {
@@ -125,7 +125,7 @@
             parent: 'country',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
+                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TERRITORY']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

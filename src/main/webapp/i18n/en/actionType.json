@@ -1,0 +1,16 @@
+{
+    "projectApp": {
+        "ActionType" : {
+            "null": "",
+            "URL": "URL",
+            "INTENT": "INTENT",
+            "SEARCH": "SEARCH",
+            "PENDING_INTENT": "PENDING_INTENT",
+            "START_ACTIVITY": "START_ACTIVITY",
+            "SERVICE": "SERVICE",
+            "BROADCAST": "BROADCAST",
+            "CONTENT_PROVIDER": "CONTENT_PROVIDER",
+            "OTHER": "OTHER"
+        }
+    }
+}

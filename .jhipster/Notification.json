@@ -1,0 +1,90 @@
+{
+    "relationships": [
+
+    ],
+
+    "fields" : [
+        {
+            "fieldId" : 1,
+            "fieldName" : "title",
+            "fieldType" : "String",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 2,
+            "fieldName" : "message",
+            "fieldType" : "String",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 3,
+            "fieldName" : "priority",
+            "fieldType" : "Priority",
+            "fieldValues": "LOW,GENERAL,MID,HIGH",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 4,
+            "fieldName" : "active",
+            "fieldType" : "Boolean"
+        },
+        {
+            "fieldId" : 5,
+            "fieldName" : "actionType",
+            "fieldType" : "ActionType",
+            "fieldValues": "URL,INTENT,SEARCH,PENDING_INTENT,START_ACTIVITY,SERVICE,BROADCAST,CONTENT_PROVIDER,OTHER",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 6,
+            "fieldName" : "actionContent",
+            "fieldType" : "String"
+        },
+        {
+            "fieldId" : 7,
+            "fieldName" : "lastModifiedBy",
+            "fieldType" : "Long"
+        },
+        {
+            "fieldId" : 8,
+            "fieldName" : "lastModifyDate",
+            "fieldType" : "LocalDate"
+        },
+        {
+            "fieldId" : 9,
+            "fieldName" : "occurDate",
+            "fieldType" : "LocalDate"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "approvalStatus",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "approvalComment",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "fromEntity",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "fromEntityId",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180313020950",
+    "dto": "no",
+    "pagination": "pagination"
+}

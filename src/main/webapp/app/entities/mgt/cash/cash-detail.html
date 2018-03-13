@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="projectApp.cash.detail.title">Cash</span> {{vm.cash.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="projectApp.cash.cash">Cash</span></dt>
+        <dd>
+            <span>{{vm.cash.cash}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.cash.lastTransactionDate">Last Transaction Date</span></dt>
+        <dd>
+            <span>{{vm.cash.lastTransactionDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.cash.transactionType">Transaction Type</span></dt>
+        <dd>
+            <span data-translate="{{'projectApp.TransactionType.' + vm.cash.transactionType}}">{{vm.cash.transactionType}}</span>
+        </dd>
+        <dt><span data-translate="projectApp.cash.user">User</span></dt>
+        <dd>
+            <a ui-sref="user-detail({id:vm.cash.user.id})">{{vm.cash.user.id}}</a>
+        </dd>
+        <dt><span data-translate="projectApp.cash.lastTransactionId">Last Transaction Id</span></dt>
+        <dd>
+            <a ui-sref="transaction-detail({id:vm.cash.lastTransactionId.id})">{{vm.cash.lastTransactionId.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="cash-detail.edit({id:vm.cash.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

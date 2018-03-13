@@ -1,0 +1,33 @@
+{
+    "projectApp": {
+        "notification" : {
+            "home": {
+                "title": "Notifications",
+                "createLabel": "Create a new Notification",
+                "createOrEditLabel": "Create or edit a Notification"
+            },
+            "created": "A new Notification is created with identifier {{ param }}",
+            "updated": "A Notification is updated with identifier {{ param }}",
+            "deleted": "A Notification is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Notification {{ id }}?"
+            },
+            "detail": {
+                "title": "Notification"
+            },
+            "title": "Title",
+            "message": "Message",
+            "priority": "Priority",
+            "active": "Active",
+            "actionType": "Action Type",
+            "actionContent": "Action Content",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifyDate": "Last Modify Date",
+            "occurDate": "Occur Date",
+            "approvalStatus": "Approval Status",
+            "approvalComment": "Approval Comment",
+            "fromEntity": "From Entity",
+            "fromEntityId": "From Entity Id"
+        }
+    }
+}

@@ -1,0 +1,146 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myNotificationLabel" data-translate="projectApp.notification.home.createOrEditLabel">Create or edit a Notification</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.notification.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.notification.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.notification.title"
+                    required/>
+            <div ng-show="editForm.title.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.message" for="field_message">Message</label>
+            <input type="text" class="form-control" name="message" id="field_message"
+                    ng-model="vm.notification.message"
+                    required/>
+            <div ng-show="editForm.message.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.message.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.priority" for="field_priority">Priority</label>
+            <select class="form-control" name="priority" ng-model="vm.notification.priority" id="field_priority" required>
+                <option value="LOW" data-translate="projectApp.Priority.LOW">LOW</option>
+                <option value="GENERAL" data-translate="projectApp.Priority.GENERAL">GENERAL</option>
+                <option value="MID" data-translate="projectApp.Priority.MID">MID</option>
+                <option value="HIGH" data-translate="projectApp.Priority.HIGH">HIGH</option>
+            </select>
+            <div ng-show="editForm.priority.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.priority.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.active" for="field_active">Active</label>
+                <input type="checkbox" name="active" id="field_active"
+                          ng-model="vm.notification.active"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.actionType" for="field_actionType">Action Type</label>
+            <select class="form-control" name="actionType" ng-model="vm.notification.actionType" id="field_actionType" required>
+                <option value="URL" data-translate="projectApp.ActionType.URL">URL</option>
+                <option value="INTENT" data-translate="projectApp.ActionType.INTENT">INTENT</option>
+                <option value="SEARCH" data-translate="projectApp.ActionType.SEARCH">SEARCH</option>
+                <option value="PENDING_INTENT" data-translate="projectApp.ActionType.PENDING_INTENT">PENDING_INTENT</option>
+                <option value="START_ACTIVITY" data-translate="projectApp.ActionType.START_ACTIVITY">START_ACTIVITY</option>
+                <option value="SERVICE" data-translate="projectApp.ActionType.SERVICE">SERVICE</option>
+                <option value="BROADCAST" data-translate="projectApp.ActionType.BROADCAST">BROADCAST</option>
+                <option value="CONTENT_PROVIDER" data-translate="projectApp.ActionType.CONTENT_PROVIDER">CONTENT_PROVIDER</option>
+                <option value="OTHER" data-translate="projectApp.ActionType.OTHER">OTHER</option>
+            </select>
+            <div ng-show="editForm.actionType.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.actionType.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.actionContent" for="field_actionContent">Action Content</label>
+            <input type="text" class="form-control" name="actionContent" id="field_actionContent"
+                    ng-model="vm.notification.actionContent"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="number" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                    ng-model="vm.notification.lastModifiedBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.lastModifyDate" for="field_lastModifyDate">Last Modify Date</label>
+                <div class="input-group">
+                    <input id="field_lastModifyDate" type="text" class="form-control" name="lastModifyDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.notification.lastModifyDate" is-open="vm.datePickerOpenStatus.lastModifyDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifyDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.occurDate" for="field_occurDate">Occur Date</label>
+                <div class="input-group">
+                    <input id="field_occurDate" type="text" class="form-control" name="occurDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.notification.occurDate" is-open="vm.datePickerOpenStatus.occurDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('occurDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.approvalStatus" for="field_approvalStatus">Approval Status</label>
+            <input type="number" class="form-control" name="approvalStatus" id="field_approvalStatus"
+                    ng-model="vm.notification.approvalStatus"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.approvalComment" for="field_approvalComment">Approval Comment</label>
+            <input type="text" class="form-control" name="approvalComment" id="field_approvalComment"
+                    ng-model="vm.notification.approvalComment"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.fromEntity" for="field_fromEntity">From Entity</label>
+            <input type="text" class="form-control" name="fromEntity" id="field_fromEntity"
+                    ng-model="vm.notification.fromEntity"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="projectApp.notification.fromEntityId" for="field_fromEntityId">From Entity Id</label>
+            <input type="text" class="form-control" name="fromEntityId" id="field_fromEntityId"
+                    ng-model="vm.notification.fromEntityId"
+                    />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

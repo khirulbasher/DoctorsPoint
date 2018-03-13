@@ -1,0 +1,11 @@
+{
+    "projectApp": {
+        "Priority" : {
+            "null": "",
+            "LOW": "LOW",
+            "GENERAL": "GENERAL",
+            "MID": "MID",
+            "HIGH": "HIGH"
+        }
+    }
+}

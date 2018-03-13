@@ -1,0 +1,15 @@
+{
+    "projectApp": {
+        "TransactionType" : {
+            "null": "",
+            "CASH_IN": "CASH_IN",
+            "CASH_OUT": "CASH_OUT",
+            "CASH_ACCEPT": "CASH_ACCEPT",
+            "CASH_SEND": "CASH_SEND",
+            "PAYMENT": "PAYMENT",
+            "INVEST": "INVEST",
+            "INTERNAL": "INTERNAL",
+            "SALARY": "SALARY"
+        }
+    }
+}

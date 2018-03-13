@@ -1,0 +1,10 @@
+{
+    "projectApp": {
+        "ApprovalStatus" : {
+            "null": "",
+            "INITIAL_PROPOSAL": "INITIAL_PROPOSAL",
+            "APPROVED": "APPROVED",
+            "REJECT": "REJECT"
+        }
+    }
+}

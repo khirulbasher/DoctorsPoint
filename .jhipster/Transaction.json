@@ -1,0 +1,67 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "fromUser",
+            "otherEntityName": "User",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "toUser",
+            "otherEntityName": "User",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+
+    "fields" : [
+        {
+            "fieldId" : 1,
+            "fieldName" : "reason",
+            "fieldType" : "String",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 2,
+            "fieldName" : "amount",
+            "fieldType" : "BigDecimal",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 3,
+            "fieldName" : "transactionType",
+            "fieldType" : "TransactionType",
+            "fieldValues": "CASH_IN,CASH_OUT,CASH_ACCEPT,CASH_SEND,PAYMENT,INVEST,INTERNAL,SALARY",
+            "fieldValidateRules" : [
+                "required"
+            ]
+        },
+        {
+            "fieldId" : 4,
+            "fieldName" : "active",
+            "fieldType" : "Boolean"
+        },
+        {
+            "fieldId" : 5,
+            "fieldName" : "approvalStatus",
+            "fieldType" : "ApprovalStatus",
+            "fieldValues": "INITIAL_PROPOSAL,APPROVED,REJECT"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "approvalComment",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180313020950",
+    "dto": "no",
+    "pagination": "pagination"
+}

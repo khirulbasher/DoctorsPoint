@@ -1,0 +1,25 @@
+{
+    "projectApp": {
+        "cash" : {
+            "home": {
+                "title": "Cash",
+                "createLabel": "Create a new Cash",
+                "createOrEditLabel": "Create or edit a Cash"
+            },
+            "created": "A new Cash is created with identifier {{ param }}",
+            "updated": "A Cash is updated with identifier {{ param }}",
+            "deleted": "A Cash is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cash {{ id }}?"
+            },
+            "detail": {
+                "title": "Cash"
+            },
+            "cash": "Cash",
+            "lastTransactionDate": "Last Transaction Date",
+            "transactionType": "Transaction Type",
+            "user": "User",
+            "lastTransactionId": "Last Transaction Id"
+        }
+    }
+}

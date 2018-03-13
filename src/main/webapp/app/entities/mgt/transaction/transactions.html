@@ -1,0 +1,78 @@
+<div>
+    <h2 data-translate="projectApp.transaction.home.title">Transactions</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="transaction.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="projectApp.transaction.home.createLabel">
+                        Create new Transaction
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reason"><span data-translate="projectApp.transaction.reason">Reason</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span data-translate="projectApp.transaction.amount">Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="transactionType"><span data-translate="projectApp.transaction.transactionType">Transaction Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span data-translate="projectApp.transaction.active">Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="approvalStatus"><span data-translate="projectApp.transaction.approvalStatus">Approval Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="approvalComment"><span data-translate="projectApp.transaction.approvalComment">Approval Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fromUser.id"><span data-translate="projectApp.transaction.fromUser">From User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="toUser.id"><span data-translate="projectApp.transaction.toUser">To User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="transaction in vm.transactions track by transaction.id">
+                    <td><a ui-sref="transaction-detail({id:transaction.id})">{{transaction.id}}</a></td>
+                    <td>{{transaction.reason}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td data-translate="{{'projectApp.TransactionType.' + transaction.transactionType}}">{{transaction.transactionType}}</td>
+                    <td>{{transaction.active}}</td>
+                    <td data-translate="{{'projectApp.ApprovalStatus.' + transaction.approvalStatus}}">{{transaction.approvalStatus}}</td>
+                    <td>{{transaction.approvalComment}}</td>
+                    <td>
+                        <a ui-sref="user-detail({id:transaction.fromUser.id})">{{transaction.fromUser.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="user-detail({id:transaction.toUser.id})">{{transaction.toUser.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="transaction-detail({id:transaction.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="transaction.edit({id:transaction.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="transaction.delete({id:transaction.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

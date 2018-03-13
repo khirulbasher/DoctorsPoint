@@ -1,0 +1,28 @@
+{
+    "projectApp": {
+        "transaction" : {
+            "home": {
+                "title": "Transactions",
+                "createLabel": "नया Transaction बनाएँ",
+                "createOrEditLabel": "Transaction बनाएँ या संपादित करें"
+            },
+            "created": "एक नया Transaction [identifier: {{ param }}] तैयार है",
+            "updated": "एक Transaction [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Transaction [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "Transaction [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Transaction"
+            },
+            "reason": "Reason",
+            "amount": "Amount",
+            "transactionType": "Transaction Type",
+            "active": "Active",
+            "approvalStatus": "Approval Status",
+            "approvalComment": "Approval Comment",
+            "fromUser": "From User",
+            "toUser": "To User"
+        }
+    }
+}
