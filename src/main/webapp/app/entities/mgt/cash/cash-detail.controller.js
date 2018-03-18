@@ -5,17 +5,11 @@
         .module('projectApp')
         .controller('CashDetailController', CashDetailController);
 
-    CashDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Cash', 'User', 'Transaction'];
+    CashDetailController.$inject = ['entity'];
 
-    function CashDetailController($scope, $rootScope, $stateParams, previousState, entity, Cash, User, Transaction) {
+    function CashDetailController(entity) {
         var vm = this;
 
         vm.cash = entity;
-        vm.previousState = previousState.name;
-
-        var unsubscribe = $rootScope.$on('projectApp:cashUpdate', function(event, result) {
-            vm.cash = result;
-        });
-        $scope.$on('$destroy', unsubscribe);
     }
 })();

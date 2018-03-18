@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('CashController', CashController);
 
-    CashController.$inject = ['$state', 'Cash', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CashController.$inject = ['$state', 'Cash', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function CashController($state, Cash, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CashController($state, Cash, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,9 @@
                 search: vm.currentSearch
             });
         }
+
+        $scope.$on('cash', function ($event, message) {
+            loadAll();
+        });
     }
 })();

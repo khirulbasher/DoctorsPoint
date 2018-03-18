@@ -17,9 +17,9 @@
             },
             "cash": "Cash",
             "lastTransactionDate": "Last Transaction Date",
-            "transactionType": "Transaction Type",
+            "transactionType": "Last Transaction Type",
             "user": "User",
-            "lastTransactionId": "Last Transaction Id"
+            "lastTransactionId": "Last Transaction"
         }
     }
 }

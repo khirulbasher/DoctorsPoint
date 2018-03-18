@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.Cash;
 
 import com.lemon.project.repository.CashRepository;
+import com.lemon.project.service.EntityService;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +57,7 @@ public class CashResource {
         if (cash.getId() != null) {
             throw new BadRequestAlertException("A new cash cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        cash.setLastTransactionDate(LocalDate.now());
         Cash result = cashRepository.save(cash);
         return ResponseEntity.created(new URI("/api/cash/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

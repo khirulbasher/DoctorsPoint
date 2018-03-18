@@ -2,9 +2,9 @@
     <h2 data-translate="projectApp.cash.home.title">Cash</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
-        <div class="row">
+        <div ng-hide="true" has-authority="ROLE_ADMIN" class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="cash.new" >
+                <button class="btn btn-pr" ui-sref="cash.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="projectApp.cash.home.createLabel">
                         Create new Cash
@@ -18,7 +18,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span data-translate="global.field.sl"></span></th>
                     <th jh-sort-by="cash"><span data-translate="projectApp.cash.cash">Cash</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastTransactionDate"><span data-translate="projectApp.cash.lastTransactionDate">Last Transaction Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="transactionType"><span data-translate="projectApp.cash.transactionType">Transaction Type</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -29,12 +29,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="cash in vm.cash track by cash.id">
-                    <td><a ui-sref="cash-detail({id:cash.id})">{{cash.id}}</a></td>
-                    <td>{{cash.cash}}</td>
-                        <td>{{cash.lastTransactionDate | date:'mediumDate'}}</td>
+                    <td>{{$index+1}}</td>
+                    <td><a ui-sref="cash-detail({id:cash.id})">{{cash.cash}}</a></td>
+                    <td>{{cash.lastTransactionDate | date:'mediumDate'}}</td>
                     <td data-translate="{{'projectApp.TransactionType.' + cash.transactionType}}">{{cash.transactionType}}</td>
                     <td>
-                        <a ui-sref="user-detail({id:cash.user.id})">{{cash.user.id}}</a>
+                        <a ui-sref="user-detail({id:cash.user.id})">{{cash.user.login}}</a>
                     </td>
                     <td>
                         <a ui-sref="transaction-detail({id:cash.lastTransactionId.id})">{{cash.lastTransactionId.id}}</a>
@@ -43,17 +43,17 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="cash-detail({id:cash.id})"
-                                    class="btn btn-info btn-sm">
+                                    class="btn btn- btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
+                            <button has-authority="ROLE_ADMIN" type="submit"
                                     ui-sref="cash.edit({id:cash.id})"
-                                    class="btn btn-primary btn-sm">
+                                    class="btn btn-pr btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
-                            <button type="submit"
+                            <button has-authority="ROLE_ADMIN" type="submit"
                                     ui-sref="cash.delete({id:cash.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>

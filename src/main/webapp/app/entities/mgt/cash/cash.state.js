@@ -74,112 +74,80 @@
                 }],
                 entity: ['$stateParams', 'Cash', function($stateParams, Cash) {
                     return Cash.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'cash',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
                 }]
             }
-        })
-        .state('cash-detail.edit', {
-            parent: 'cash-detail',
-            url: '/detail/edit',
-            data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/mgt/cash/cash-dialog.html',
-                    controller: 'CashDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Cash', function(Cash) {
-                            return Cash.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
         })
         .state('cash.new', {
             parent: 'cash',
             url: '/new',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
+                authorities: ['ROLE_ADMIN']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/mgt/cash/cash-dialog.html',
                     controller: 'CashDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                cash: null,
-                                lastTransactionDate: null,
-                                transactionType: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('cash', null, { reload: 'cash' });
-                }, function() {
-                    $state.go('cash');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('cash');
+                    $translatePartialLoader.addPart('transactionType');
+                    return $translate.refresh();
+                }],
+
+                entity: function () {
+                    return null;
+                }
+            }
         })
         .state('cash.edit', {
             parent: 'cash',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
+                authorities: ['ROLE_ADMIN']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/mgt/cash/cash-dialog.html',
                     controller: 'CashDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Cash', function(Cash) {
-                            return Cash.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('cash', null, { reload: 'cash' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('cash');
+                    $translatePartialLoader.addPart('transactionType');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Cash', function($stateParams, Cash) {
+                    return Cash.get({id : $stateParams.id}).$promise;
+                }]
+            }
         })
         .state('cash.delete', {
             parent: 'cash',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
+                authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/mgt/cash/cash-delete-dialog.html',
-                    controller: 'CashDeleteController',
+                    templateUrl: 'app/entities/entity-global-dialog.html',
+                    controller: 'EntityGlobalController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Cash', function(Cash) {
-                            return Cash.get({id : $stateParams.id}).$promise;
+                        obj: ['$stateParams','Cash','$rootScope', function($stateParams, Cash,$rootScope) {
+                            return {
+                                title:'Cash Delete Operation',
+                                callback: function() {
+                                    Cash.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('cash','loadAll');
+                                    });
+                                }
+                            }
                         }]
                     }
                 }).result.then(function() {

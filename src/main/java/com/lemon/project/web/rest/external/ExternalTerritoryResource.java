@@ -3,6 +3,7 @@ package com.lemon.project.web.rest.external;
 import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.Country;
 import com.lemon.project.repository.CountryRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -34,6 +34,13 @@ public class ExternalTerritoryResource {
     @GetMapping("/all/country/{limit}/{from}")
     @Timed
     public ResponseEntity<List<Country>> findAllCountry(@PathVariable("limit") Long limit,@PathVariable("from") Long from) {
-        return Optional.ofNullable(countryRepository.findAllByLimit(limit,from)).map(val->new ResponseEntity<>(val, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return Optional.ofNullable(countryRepository.findAllByLimit(limit,new PageRequest(0, Math.toIntExact(limit)))).map(val->new ResponseEntity<>(val, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @GetMapping("/all/entity/country")
+    @Timed
+    public ResponseEntity<List<Country>> findAll() {
+        return Optional.ofNullable(countryRepository.findAll()).map(val->new ResponseEntity<>(val,HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }

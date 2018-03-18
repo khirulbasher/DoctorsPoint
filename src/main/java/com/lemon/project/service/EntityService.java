@@ -13,4 +13,12 @@ public interface EntityService {
     <K> void modify(K entity, String date, String person) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
     <K> void modify(K entity, String[] fields, Class[] types, Object[] values) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
+
+    static String getSequence(String prefix) {
+        return getSequence(prefix,"");
+    }
+
+    static String getSequence(String prefix, String postfix) {
+        return prefix+System.currentTimeMillis()+postfix;
+    }
 }

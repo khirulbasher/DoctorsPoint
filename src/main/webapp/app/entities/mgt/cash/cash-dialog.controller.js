@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('CashDialogController', CashDialogController);
 
-    CashDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Cash', 'User', 'Transaction'];
+    CashDialogController.$inject = ['$timeout', '$scope', '$q', 'entity', 'Cash', 'User', 'Transaction','$state'];
 
-    function CashDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Cash, User, Transaction) {
+    function CashDialogController ($timeout, $scope, $q, entity, Cash, User, Transaction,$state) {
         var vm = this;
 
         vm.cash = entity;
@@ -39,7 +39,7 @@
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            $state.go('cash',{},{reload:false});
         }
 
         function save () {
@@ -53,7 +53,7 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('projectApp:cashUpdate', result);
-            $uibModalInstance.close(result);
+            clear();
             vm.isSaving = false;
         }
 
