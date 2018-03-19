@@ -1,6 +1,8 @@
 package com.lemon.project.repository;
 
 import com.lemon.project.domain.Cash;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;

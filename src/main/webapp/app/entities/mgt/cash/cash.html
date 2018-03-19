@@ -2,7 +2,7 @@
     <h2 data-translate="projectApp.cash.home.title">Cash</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
-        <div ng-hide="true" has-authority="ROLE_ADMIN" class="row">
+        <div has-authority="ROLE_ADMIN" class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-pr" ui-sref="cash.new" >
                     <span class="glyphicon glyphicon-plus"></span>
@@ -37,7 +37,7 @@
                         <a ui-sref="user-detail({id:cash.user.id})">{{cash.user.login}}</a>
                     </td>
                     <td>
-                        <a ui-sref="transaction-detail({id:cash.lastTransactionId.id})">{{cash.lastTransactionId.id}}</a>
+                        <a ui-sref="transaction-detail({id:cash.lastTransactionId.id})">{{cash.lastTransactionId.reason}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

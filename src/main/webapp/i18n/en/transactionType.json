@@ -9,7 +9,8 @@
             "PAYMENT": "PAYMENT",
             "INVEST": "INVEST",
             "INTERNAL": "INTERNAL",
-            "SALARY": "SALARY"
+            "SALARY": "SALARY",
+            "SAVINGS": "SAVINGS"
         }
     }
 }

@@ -12,8 +12,6 @@
 
         vm.district = entity;
         vm.clear = clear;
-        vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
         vm.save = save;
         vm.countries=[];
         vm.divisions=[];
@@ -64,10 +62,5 @@
             vm.isSaving = false;
         }
 
-        vm.datePickerOpenStatus.lastModifyDate = false;
-
-        function openCalendar (date) {
-            vm.datePickerOpenStatus[date] = true;
-        }
     }
 })();

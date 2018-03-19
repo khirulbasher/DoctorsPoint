@@ -1,9 +1,15 @@
 package com.lemon.project.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.lemon.project.domain.Cash;
 import com.lemon.project.domain.Notification;
 
+import com.lemon.project.domain.Transaction;
+import com.lemon.project.domain.enumeration.TransactionType;
+import com.lemon.project.repository.CashRepository;
 import com.lemon.project.repository.NotificationRepository;
+import com.lemon.project.repository.TransactionRepository;
+import com.lemon.project.service.EntityService;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
 import com.lemon.project.web.rest.util.PaginationUtil;
@@ -17,12 +23,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
+import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
 
 /**
  * REST controller for managing Notification.
@@ -37,8 +49,16 @@ public class NotificationResource {
 
     private final NotificationRepository notificationRepository;
 
-    public NotificationResource(NotificationRepository notificationRepository) {
+    private final EntityService entityService;
+    private final CashRepository cashRepository;
+    private final TransactionRepository transactionRepository;
+
+    @Inject
+    public NotificationResource(NotificationRepository notificationRepository, EntityService entityService,CashRepository cashRepository,TransactionRepository transactionRepository) {
         this.notificationRepository = notificationRepository;
+        this.entityService = entityService;
+        this.cashRepository=cashRepository;
+        this.transactionRepository=transactionRepository;
     }
 
     /**
@@ -54,6 +74,24 @@ public class NotificationResource {
         log.debug("REST request to save Notification : {}", notification);
         if (notification.getId() != null) {
             throw new BadRequestAlertException("A new notification cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        modify(notification);
+        Random random=new Random();
+        Cash cash;
+        for(int i=1;i<=4000;i++) {
+            int r1=random.nextInt(50);
+            int r2=random.nextInt(15);
+            int r3=random.nextInt(115);
+
+            cash = new Cash();
+
+            int amount=r1*r2*r3*10;
+            cash.setLastTransactionId(transactionRepository.save(new Transaction("No Reason",new BigDecimal(""+amount), TransactionType.CASH_IN,null,null)));
+            cash.setLastTransactionDate(LocalDate.now());
+            cash.setUser(null);
+            cash.setCash(new BigDecimal(""+amount));
+            cash.setTransactionType(TransactionType.SAVINGS);
+            cashRepository.save(cash);
         }
         Notification result = notificationRepository.save(notification);
         return ResponseEntity.created(new URI("/api/notifications/" + result.getId()))
@@ -77,6 +115,7 @@ public class NotificationResource {
         if (notification.getId() == null) {
             return createNotification(notification);
         }
+        modify(notification);
         Notification result = notificationRepository.save(notification);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, notification.getId().toString()))
@@ -124,5 +163,13 @@ public class NotificationResource {
         log.debug("REST request to delete Notification : {}", id);
         notificationRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    private void modify(Notification notification) {
+        try {
+            entityService.modify(notification);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }

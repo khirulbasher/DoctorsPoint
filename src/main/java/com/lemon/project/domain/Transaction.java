@@ -57,6 +57,17 @@ public class Transaction implements Serializable {
     @ManyToOne
     private User toUser;
 
+    public Transaction() {
+    }
+
+    public Transaction(String reason, BigDecimal amount, TransactionType transactionType, User fromUser, User toUser) {
+        this.reason = reason;
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.fromUser = fromUser;
+        this.toUser = toUser;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
