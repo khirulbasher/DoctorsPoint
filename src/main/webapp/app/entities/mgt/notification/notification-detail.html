@@ -3,68 +3,80 @@
     <h2><span data-translate="projectApp.notification.detail.title">Notification</span> {{vm.notification.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="projectApp.notification.title">Title</span></dt>
-        <dd>
-            <span>{{vm.notification.title}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.message">Message</span></dt>
-        <dd>
-            <span>{{vm.notification.message}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.priority">Priority</span></dt>
-        <dd>
-            <span data-translate="{{'projectApp.Priority.' + vm.notification.priority}}">{{vm.notification.priority}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.active">Active</span></dt>
-        <dd>
-            <span>{{vm.notification.active}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.actionType">Action Type</span></dt>
-        <dd>
-            <span data-translate="{{'projectApp.ActionType.' + vm.notification.actionType}}">{{vm.notification.actionType}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.actionContent">Action Content</span></dt>
-        <dd>
-            <span>{{vm.notification.actionContent}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vm.notification.lastModifiedBy}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.lastModifyDate">Last Modify Date</span></dt>
-        <dd>
-            <span>{{vm.notification.lastModifyDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.occurDate">Occur Date</span></dt>
-        <dd>
-            <span>{{vm.notification.occurDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.approvalStatus">Approval Status</span></dt>
-        <dd>
-            <span>{{vm.notification.approvalStatus}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.approvalComment">Approval Comment</span></dt>
-        <dd>
-            <span>{{vm.notification.approvalComment}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.fromEntity">From Entity</span></dt>
-        <dd>
-            <span>{{vm.notification.fromEntity}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.notification.fromEntityId">From Entity Id</span></dt>
-        <dd>
-            <span>{{vm.notification.fromEntityId}}</span>
-        </dd>
-    </dl>
+
+    <div class="table table-hover">
+        <table class="table">
+            <thead>
+            <tr class="">
+                <th data-translate="entity.field"></th>
+                <th data-translate="entity.value"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td data-translate="projectApp.notification.title"></td>
+                <td>{{vm.notification.title}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.message"></td>
+                <td>{{vm.notification.message}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.priority"></td>
+                <td>{{vm.notification.priority}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.actionType"></td>
+                <td>{{vm.notification.actionType}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.actionContent"></td>
+                <td>{{vm.notification.actionContent}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.approvalComment"></td>
+                <td>{{vm.notification.approvalComment}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.fromEntity"></td>
+                <td>{{vm.notification.fromEntity}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.fromEntityId"></td>
+                <td>{{vm.notification.fromEntityId}}</td>
+            </tr>
+            <tr>
+                <td data-translate="entity.activeStatus"></td>
+                <td>{{getActive(vm.notification.active)}}</td>
+            </tr>
+            <tr>
+                <td data-translate="entity.location"></td>
+                <td>[Lat:{{vm.country.latitude}} , Lang:{{vm.country.longitude}}]</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.lastModifiedBy"></td>
+                <td><a ui-sref="user-detail({id:vm.notification.lastModifiedBy})">See Details</a> </td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.lastModifyDate"></td>
+                <td>{{vm.notification.lastModifyDate | date:'mediumDate'}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.notification.occurDate"></td>
+                <td>{{vm.notification.occurDate | date:'mediumDate'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
+            ng-click="back('notification')"
+            class="btn btn-in">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" ui-sref="notification-detail.edit({id:vm.notification.id})" class="btn btn-primary">
+    <button type="button" ui-sref="notification.edit({id:vm.notification.id})" class="btn btn-pr">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
     </button>

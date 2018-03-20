@@ -5,34 +5,14 @@
         .module('projectApp')
         .controller('CashDialogController', CashDialogController);
 
-    CashDialogController.$inject = ['$timeout', '$scope', '$q', 'entity', 'Cash', 'User', 'Transaction','$state'];
+    CashDialogController.$inject = ['$timeout', '$scope', 'entity', 'Cash','$state'];
 
-    function CashDialogController ($timeout, $scope, $q, entity, Cash, User, Transaction,$state) {
+    function CashDialogController ($timeout, $scope, entity, Cash,$state) {
         var vm = this;
 
         vm.cash = entity;
         vm.clear = clear;
-        vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.users = User.query({filter: 'cash-is-null'});
-        $q.all([vm.cash.$promise, vm.users.$promise]).then(function() {
-            if (!vm.cash.user || !vm.cash.user.id) {
-                return $q.reject();
-            }
-            return User.get({id : vm.cash.user.id}).$promise;
-        }).then(function(user) {
-            vm.users.push(user);
-        });
-        vm.lasttransactionids = Transaction.query({filter: 'cash-is-null'});
-        $q.all([vm.cash.$promise, vm.lasttransactionids.$promise]).then(function() {
-            if (!vm.cash.lastTransactionId || !vm.cash.lastTransactionId.id) {
-                return $q.reject();
-            }
-            return Transaction.get({id : vm.cash.lastTransactionId.id}).$promise;
-        }).then(function(lastTransactionId) {
-            vm.lasttransactionids.push(lastTransactionId);
-        });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -59,12 +39,6 @@
 
         function onSaveError () {
             vm.isSaving = false;
-        }
-
-        vm.datePickerOpenStatus.lastTransactionDate = false;
-
-        function openCalendar (date) {
-            vm.datePickerOpenStatus[date] = true;
         }
     }
 })();

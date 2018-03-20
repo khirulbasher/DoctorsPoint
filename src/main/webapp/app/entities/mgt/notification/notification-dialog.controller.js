@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('NotificationDialogController', NotificationDialogController);
 
-    NotificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Notification'];
+    NotificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'entity', 'Notification','$state'];
 
-    function NotificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Notification) {
+    function NotificationDialogController ($timeout, $scope, $stateParams, entity, Notification,$state) {
         var vm = this;
 
         vm.notification = entity;
@@ -21,7 +21,7 @@
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            $state.go('notification',{},{reload:true});
         }
 
         function save () {
@@ -35,7 +35,7 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('projectApp:notificationUpdate', result);
-            $uibModalInstance.close(result);
+            clear();
             vm.isSaving = false;
         }
 
@@ -43,7 +43,6 @@
             vm.isSaving = false;
         }
 
-        vm.datePickerOpenStatus.lastModifyDate = false;
         vm.datePickerOpenStatus.occurDate = false;
 
         function openCalendar (date) {

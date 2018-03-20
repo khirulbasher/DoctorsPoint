@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('NotificationController', NotificationController);
 
-    NotificationController.$inject = ['$state', 'Notification', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    NotificationController.$inject = ['$state', 'Notification', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function NotificationController($state, Notification, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function NotificationController($state, Notification, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,9 @@
                 search: vm.currentSearch
             });
         }
+
+        $scope.$on('notification', function ($event, message) {
+            loadAll();
+        });
     }
 })();

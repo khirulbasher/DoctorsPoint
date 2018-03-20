@@ -76,41 +76,8 @@
                 }],
                 entity: ['$stateParams', 'Notification', function($stateParams, Notification) {
                     return Notification.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'notification',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
                 }]
             }
-        })
-        .state('notification-detail.edit', {
-            parent: 'notification-detail',
-            url: '/detail/edit',
-            data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/mgt/notification/notification-dialog.html',
-                    controller: 'NotificationDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Notification', function(Notification) {
-                            return Notification.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
         })
         .state('notification.new', {
             parent: 'notification',
@@ -118,39 +85,24 @@
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/mgt/notification/notification-dialog.html',
                     controller: 'NotificationDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                title: null,
-                                message: null,
-                                priority: null,
-                                active: null,
-                                actionType: null,
-                                actionContent: null,
-                                lastModifiedBy: null,
-                                lastModifyDate: null,
-                                occurDate: null,
-                                approvalStatus: null,
-                                approvalComment: null,
-                                fromEntity: null,
-                                fromEntityId: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('notification', null, { reload: 'notification' });
-                }, function() {
-                    $state.go('notification');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('notification');
+                    $translatePartialLoader.addPart('priority');
+                    $translatePartialLoader.addPart('actionType');
+                    return $translate.refresh();
+                }],
+                entity: function () {
+                    return null;
+                }
+            }
         })
         .state('notification.edit', {
             parent: 'notification',
@@ -158,24 +110,24 @@
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/mgt/notification/notification-dialog.html',
                     controller: 'NotificationDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Notification', function(Notification) {
-                            return Notification.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('notification', null, { reload: 'notification' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('notification');
+                    $translatePartialLoader.addPart('priority');
+                    $translatePartialLoader.addPart('actionType');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Notification', function($stateParams, Notification) {
+                    return Notification.get({id : $stateParams.id}).$promise;
+                }]
+            }
         })
         .state('notification.delete', {
             parent: 'notification',
@@ -185,13 +137,20 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/mgt/notification/notification-delete-dialog.html',
-                    controller: 'NotificationDeleteController',
+                    templateUrl: 'app/entities/entity-global-dialog.html',
+                    controller: 'EntityGlobalController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Notification', function(Notification) {
-                            return Notification.get({id : $stateParams.id}).$promise;
+                        obj: ['$stateParams','Notification','$rootScope', function($stateParams, Notification,$rootScope) {
+                            return {
+                                title:'Notification Delete Operation',
+                                callback: function() {
+                                    Notification.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('notification','loadAll');
+                                    });
+                                }
+                            }
                         }]
                     }
                 }).result.then(function() {

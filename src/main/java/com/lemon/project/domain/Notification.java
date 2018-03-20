@@ -196,10 +196,7 @@ public class Notification implements Serializable {
             return false;
         }
         Notification notification = (Notification) o;
-        if (notification.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), notification.getId());
+        return notification.getId() != null && getId() != null && Objects.equals(getId(), notification.getId());
     }
 
     @Override

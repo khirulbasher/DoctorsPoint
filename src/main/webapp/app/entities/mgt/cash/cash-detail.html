@@ -18,8 +18,8 @@
                 <td>{{vm.cash.cash}}</td>
             </tr>
             <tr>
-                <td data-translate="entity.cash.user"></td>
-                <td><a ui-sref="user-detail({id:vm.cash.user.id})">{{vm.cash.user.login}}</a></td>
+                <td data-translate="projectApp.cash.user"></td>
+                <td><a ui-sref="user-detail({id:vm.cash.user.id})">See Details</a></td>
             </tr>
             <tr>
                 <td data-translate="projectApp.cash.lastTransactionId"></td>
@@ -31,7 +31,7 @@
                 <td>{{vm.cash.lastTransactionDate | date:'mediumDate'}}</td>
             </tr>
             <tr>
-                <td data-translate="entity.cash.transactionType"></td>
+                <td data-translate="projectApp.cash.transactionType"></td>
                 <td>{{vm.cash.transactionType}}</td>
             </tr>
             </tbody>
@@ -44,7 +44,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button has-authority="ROLE_ADMIN" type="button" ui-sref="cash.edit({id:vm.cash.id})" class="btn btn-primary">
+    <button has-authority="ROLE_ADMIN" type="button" ui-sref="cash.edit({id:vm.cash.id})" class="btn btn-pr">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
     </button>

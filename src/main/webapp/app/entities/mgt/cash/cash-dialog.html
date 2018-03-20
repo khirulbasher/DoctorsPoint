@@ -12,7 +12,7 @@
                 <input type="number" class="form-control" name="cash" id="field_cash"
                        ng-model="vm.cash.cash"
                        required/>
-                <div ng-show="editForm.cash.$invalid">
+                <div ng-show="editForm.cash.$invalid && editForm.cash.$dirty">
                     <p class="help-block"
                        ng-show="editForm.cash.$error.required" data-translate="entity.validation.required">
                         This field is required.
@@ -45,7 +45,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-pr">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>
