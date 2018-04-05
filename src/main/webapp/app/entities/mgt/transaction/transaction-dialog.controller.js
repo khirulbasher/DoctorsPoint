@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('TransactionDialogController', TransactionDialogController);
 
-    TransactionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Transaction', 'User'];
+    TransactionDialogController.$inject = ['$timeout', '$scope', 'entity', 'Transaction', 'User', '$state'];
 
-    function TransactionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Transaction, User) {
+    function TransactionDialogController ($timeout, $scope, entity, Transaction, User,$state) {
         var vm = this;
 
         vm.transaction = entity;
@@ -20,7 +20,7 @@
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            $state.go('transaction',{},{reload:false});
         }
 
         function save () {
@@ -34,7 +34,7 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('projectApp:transactionUpdate', result);
-            $uibModalInstance.close(result);
+            clear();
             vm.isSaving = false;
         }
 

@@ -5,9 +5,9 @@
         .module('projectApp')
         .controller('TransactionController', TransactionController);
 
-    TransactionController.$inject = ['$state', 'Transaction', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    TransactionController.$inject = ['$state', 'Transaction', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$scope'];
 
-    function TransactionController($state, Transaction, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function TransactionController($state, Transaction, ParseLinks, AlertService, paginationConstants, pagingParams,$scope) {
 
         var vm = this;
 
@@ -56,5 +56,9 @@
                 search: vm.currentSearch
             });
         }
+
+        $scope.$on('transaction',function($event,message){
+            loadAll();
+        });
     }
 })();

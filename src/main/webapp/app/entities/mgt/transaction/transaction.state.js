@@ -76,41 +76,8 @@
                 }],
                 entity: ['$stateParams', 'Transaction', function($stateParams, Transaction) {
                     return Transaction.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'transaction',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
                 }]
             }
-        })
-        .state('transaction-detail.edit', {
-            parent: 'transaction-detail',
-            url: '/detail/edit',
-            data: {
-                authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/mgt/transaction/transaction-dialog.html',
-                    controller: 'TransactionDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Transaction', function(Transaction) {
-                            return Transaction.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
         })
         .state('transaction.new', {
             parent: 'transaction',
@@ -118,32 +85,24 @@
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/mgt/transaction/transaction-dialog.html',
                     controller: 'TransactionDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                reason: null,
-                                amount: null,
-                                transactionType: null,
-                                active: null,
-                                approvalStatus: null,
-                                approvalComment: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('transaction', null, { reload: 'transaction' });
-                }, function() {
-                    $state.go('transaction');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('transaction');
+                    $translatePartialLoader.addPart('transactionType');
+                    $translatePartialLoader.addPart('approvalStatus');
+                    return $translate.refresh();
+                }],
+                entity: function() {
+                    return null;
+                }
+            }
         })
         .state('transaction.edit', {
             parent: 'transaction',
@@ -151,24 +110,24 @@
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_MGT','ROLE_TRANSACTION']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/mgt/transaction/transaction-dialog.html',
                     controller: 'TransactionDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Transaction', function(Transaction) {
-                            return Transaction.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('transaction', null, { reload: 'transaction' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('transaction');
+                    $translatePartialLoader.addPart('transactionType');
+                    $translatePartialLoader.addPart('approvalStatus');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Transaction', function($stateParams, Transaction) {
+                    return Transaction.get({id : $stateParams.id}).$promise;
+                }]
+            }
         })
         .state('transaction.delete', {
             parent: 'transaction',
@@ -178,13 +137,20 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/mgt/transaction/transaction-delete-dialog.html',
-                    controller: 'TransactionDeleteController',
+                    templateUrl: 'app/entities/entity-global-dialog.html',
+                    controller: 'EntityGlobalController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Transaction', function(Transaction) {
-                            return Transaction.get({id : $stateParams.id}).$promise;
+                        obj: ['$stateParams','Transaction','$rootScope', function($stateParams, Transaction,$rootScope) {
+                            return {
+                                title:'Transaction Delete Operation',
+                                callback: function() {
+                                    Transaction.delete({id:$stateParams.id},function () {
+                                        $rootScope.$broadcast('transaction','loadAll');
+                                    });
+                                }
+                            }
                         }]
                     }
                 }).result.then(function() {

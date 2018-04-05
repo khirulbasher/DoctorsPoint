@@ -3,48 +3,61 @@
     <h2><span data-translate="projectApp.transaction.detail.title">Transaction</span> {{vm.transaction.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="projectApp.transaction.reason">Reason</span></dt>
-        <dd>
-            <span>{{vm.transaction.reason}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.amount">Amount</span></dt>
-        <dd>
-            <span>{{vm.transaction.amount}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.transactionType">Transaction Type</span></dt>
-        <dd>
-            <span data-translate="{{'projectApp.TransactionType.' + vm.transaction.transactionType}}">{{vm.transaction.transactionType}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.active">Active</span></dt>
-        <dd>
-            <span>{{vm.transaction.active}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.approvalStatus">Approval Status</span></dt>
-        <dd>
-            <span data-translate="{{'projectApp.ApprovalStatus.' + vm.transaction.approvalStatus}}">{{vm.transaction.approvalStatus}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.approvalComment">Approval Comment</span></dt>
-        <dd>
-            <span>{{vm.transaction.approvalComment}}</span>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.fromUser">From User</span></dt>
-        <dd>
-            <a ui-sref="user-detail({id:vm.transaction.fromUser.id})">{{vm.transaction.fromUser.id}}</a>
-        </dd>
-        <dt><span data-translate="projectApp.transaction.toUser">To User</span></dt>
-        <dd>
-            <a ui-sref="user-detail({id:vm.transaction.toUser.id})">{{vm.transaction.toUser.id}}</a>
-        </dd>
-    </dl>
+    <div class="table table-hover">
+        <table class="table">
+            <thead>
+            <tr class="">
+                <th data-translate="entity.field"></th>
+                <th data-translate="entity.value"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td data-translate="projectApp.transaction.reason"></td>
+                <td>{{vm.transaction.reason}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.transaction.amount"></td>
+                <td>{{vm.transaction.amount}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.transaction.transactionType"></td>
+                <td data-translate="{{'projectApp.TransactionType.' + vm.transaction.transactionType}}">{{vm.transaction.transactionType}}</td>
+            </tr>
+
+            <tr>
+                <td data-translate="projectApp.transaction.approvalStatus"></td>
+                <td>{{vm.transaction.amount}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.transaction.approvalComment"></td>
+                <td>{{vm.transaction.approvalComment}}</td>
+            </tr>
+
+            <tr>
+                <td data-translate="projectApp.transaction.fromUser"></td>
+                <td>{{vm.transaction.fromUser.login}}</td>
+            </tr>
+            <tr>
+                <td data-translate="projectApp.transaction.toUser"></td>
+                <td>{{vm.transaction.toUser.login}}</td>
+            </tr>
+            <tr>
+                <td data-translate="entity.activeStatus"></td>
+                <td>{{getActive(vm.transaction.active)}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <button type="submit"
             ng-click="back('transaction')"
-            class="btn btn-info">
+            class="btn btn-in">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" ui-sref="transaction-detail.edit({id:vm.transaction.id})" class="btn btn-primary">
+    <button type="button" ui-sref="transaction.edit({id:vm.transaction.id})" class="btn btn-pr">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
     </button>
