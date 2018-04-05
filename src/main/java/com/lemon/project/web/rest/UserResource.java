@@ -63,6 +63,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_MGT})
 public class UserResource {
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);

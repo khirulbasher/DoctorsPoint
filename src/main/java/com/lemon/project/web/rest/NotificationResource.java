@@ -3,6 +3,7 @@ package com.lemon.project.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.lemon.project.domain.Notification;
 import com.lemon.project.repository.NotificationRepository;
+import com.lemon.project.security.AuthoritiesConstants;
 import com.lemon.project.service.EntityService;
 import com.lemon.project.web.rest.errors.BadRequestAlertException;
 import com.lemon.project.web.rest.util.HeaderUtil;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -31,6 +33,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_MGT})
 public class NotificationResource {
 
     private final Logger log = LoggerFactory.getLogger(NotificationResource.class);

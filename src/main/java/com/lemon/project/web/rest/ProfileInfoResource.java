@@ -2,9 +2,11 @@ package com.lemon.project.web.rest;
 
 import com.lemon.project.config.DefaultProfileUtil;
 
+import com.lemon.project.security.AuthoritiesConstants;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.springframework.core.env.Environment;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
+@Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.ROLE_MGT})
 public class ProfileInfoResource {
 
     private final Environment env;
