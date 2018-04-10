@@ -8,97 +8,105 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.transaction.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.transaction.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.transaction.reason" for="field_reason">Reason</label>
-            <input type="text" class="form-control" name="reason" id="field_reason"
-                    ng-model="vm.transaction.reason"
-                    required/>
-            <div ng-show="editForm.reason.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.reason.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.transaction.reason" for="field_reason">Reason</label>
+                <input type="text" class="form-control" name="reason" id="field_reason"
+                       ng-model="vm.transaction.reason"
+                       required/>
+                <div ng-show="editForm.reason.$invalid && editForm.reason.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.reason.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.transaction.amount" for="field_amount">Amount</label>
+                <input type="number" class="form-control" name="amount" id="field_amount"
+                       ng-model="vm.transaction.amount"
+                       required/>
+                <div ng-show="editForm.amount.$invalid && editForm.amount.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.amount.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.amount.$error.number" data-translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.transaction.amount" for="field_amount">Amount</label>
-            <input type="number" class="form-control" name="amount" id="field_amount"
-                    ng-model="vm.transaction.amount"
-                    required/>
-            <div ng-show="editForm.amount.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.amount.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.amount.$error.number" data-translate="entity.validation.number">
-                    This field should be a number.
-                </p>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.transaction.transactionType" for="field_transactionType">Transaction Type</label>
+                <select class="form-control" name="transactionType" ng-model="vm.transaction.transactionType" id="field_transactionType" required>
+                    <option value="CASH_IN" data-translate="projectApp.TransactionType.CASH_IN">CASH_IN</option>
+                    <option value="CASH_OUT" data-translate="projectApp.TransactionType.CASH_OUT">CASH_OUT</option>
+                    <option value="CASH_ACCEPT" data-translate="projectApp.TransactionType.CASH_ACCEPT">CASH_ACCEPT</option>
+                    <option value="CASH_SEND" data-translate="projectApp.TransactionType.CASH_SEND">CASH_SEND</option>
+                    <option value="PAYMENT" data-translate="projectApp.TransactionType.PAYMENT">PAYMENT</option>
+                    <option value="INVEST" data-translate="projectApp.TransactionType.INVEST">INVEST</option>
+                    <option value="INTERNAL" data-translate="projectApp.TransactionType.INTERNAL">INTERNAL</option>
+                    <option value="SALARY" data-translate="projectApp.TransactionType.SALARY">SALARY</option>
+                    <option value="SAVINGS" data-translate="projectApp.TransactionType.SAVINGS">SALARY</option>
+                </select>
+                <div ng-show="editForm.transactionType.$invalid && editForm.transactionType.$dirty">
+                    <p class="help-block"
+                       ng-show="editForm.transactionType.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.transaction.approvalStatus" for="field_approvalStatus">Approval Status</label>
+                <select class="form-control" name="approvalStatus" ng-model="vm.transaction.approvalStatus" id="field_approvalStatus">
+                    <option value="INITIAL_PROPOSAL" data-translate="projectApp.ApprovalStatus.INITIAL_PROPOSAL">INITIAL_PROPOSAL</option>
+                    <option value="APPROVED" data-translate="projectApp.ApprovalStatus.APPROVED">APPROVED</option>
+                    <option value="REJECT" data-translate="projectApp.ApprovalStatus.REJECT">REJECT</option>
+                </select>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.transaction.transactionType" for="field_transactionType">Transaction Type</label>
-            <select class="form-control" name="transactionType" ng-model="vm.transaction.transactionType" id="field_transactionType" required>
-                <option value="CASH_IN" data-translate="projectApp.TransactionType.CASH_IN">CASH_IN</option>
-                <option value="CASH_OUT" data-translate="projectApp.TransactionType.CASH_OUT">CASH_OUT</option>
-                <option value="CASH_ACCEPT" data-translate="projectApp.TransactionType.CASH_ACCEPT">CASH_ACCEPT</option>
-                <option value="CASH_SEND" data-translate="projectApp.TransactionType.CASH_SEND">CASH_SEND</option>
-                <option value="PAYMENT" data-translate="projectApp.TransactionType.PAYMENT">PAYMENT</option>
-                <option value="INVEST" data-translate="projectApp.TransactionType.INVEST">INVEST</option>
-                <option value="INTERNAL" data-translate="projectApp.TransactionType.INTERNAL">INTERNAL</option>
-                <option value="SALARY" data-translate="projectApp.TransactionType.SALARY">SALARY</option>
-                <option value="SAVINGS" data-translate="projectApp.TransactionType.SAVINGS">SALARY</option>
-            </select>
-            <div ng-show="editForm.transactionType.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.transactionType.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" data-translate="projectApp.transaction.approvalComment" for="field_approvalComment">Approval Comment</label>
+                <input type="text" class="form-control" name="approvalComment" id="field_approvalComment"
+                       ng-model="vm.transaction.approvalComment"
+                />
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.transaction.active" for="field_active">Active</label>
-                <input type="checkbox" name="active" id="field_active"
-                          ng-model="vm.transaction.active"/>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.transaction.approvalStatus" for="field_approvalStatus">Approval Status</label>
-            <select class="form-control" name="approvalStatus" ng-model="vm.transaction.approvalStatus" id="field_approvalStatus">
-                <option value="INITIAL_PROPOSAL" data-translate="projectApp.ApprovalStatus.INITIAL_PROPOSAL">INITIAL_PROPOSAL</option>
-                <option value="APPROVED" data-translate="projectApp.ApprovalStatus.APPROVED">APPROVED</option>
-                <option value="REJECT" data-translate="projectApp.ApprovalStatus.REJECT">REJECT</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="projectApp.transaction.approvalComment" for="field_approvalComment">Approval Comment</label>
-            <input type="text" class="form-control" name="approvalComment" id="field_approvalComment"
-                    ng-model="vm.transaction.approvalComment"
-                    />
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="entity.activeStatus" for="field_active">Active</label>
+
+                    <div class="input-margin" id="field_active" >
+                        <label class="radio-inline">
+                            <input type="radio" name="active"
+                                   ng-checked="vm.transaction.active == true || vm.transaction.id == null"
+                                   ng-value="true" data-ng-model="vm.transaction.active">
+                            <span translate="status.active">active</span></label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inActive"
+                                   ng-checked="vm.transaction.active == false"
+                                   ng-value="false"
+                                   data-ng-model="vm.transaction.active">
+                            <span translate="status.inactive">inactive</span></label>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="form-group">
-            <label data-translate="projectApp.transaction.fromUser" for="field_fromUser">From User</label>
-            <select class="form-control" id="field_fromUser" name="fromUser" ng-model="vm.transaction.fromUser" ng-options="User as User.id for User in vm.users track by User.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label data-translate="projectApp.transaction.toUser" for="field_toUser">To User</label>
-            <select class="form-control" id="field_toUser" name="toUser" ng-model="vm.transaction.toUser" ng-options="User as User.id for User in vm.users track by User.id">
-                <option value=""></option>
-            </select>
-        </div>
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-pr">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>
